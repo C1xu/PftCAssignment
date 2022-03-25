@@ -13,6 +13,8 @@ const PORTnoS = 80; //80 Http port
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const apiKey = "projects/782692281082/secrets/getOutAPI_key/versions/1";
+
 //Session Config
 // const config = {
 //   genid: (req) => uuid(),
@@ -23,9 +25,10 @@ const __dirname = dirname(__filename);
 // }
 
 const app = Express();
-app.use(cors());
 //app.use(session(config));
+app.enable("trust proxy");
 app.use(Express.static(path.join(__dirname, "../frontend/public/")));
+app.use(cors());
 
 const startServer = () => {
   app.listen(PORTnoS, () => console.log("Server Listening on port: " + PORTnoS));
@@ -110,6 +113,5 @@ app.post("/register", (req, res) => {
   });  
 });
 
-//Starts locally and online
-startServer();
+//startServer();
 startServerEncrypted();
