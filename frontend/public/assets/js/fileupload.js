@@ -1,5 +1,3 @@
-let convertButton = document.getElementById("convert");
-
 const uploadFile = async () => {
     console.log("Button pressed");
     const fileUpload = document.getElementById("fileInput").files[0];
@@ -15,5 +13,3 @@ const uploadFile = async () => {
       console.log(response);
     }
 };
-
-convertButton.addEventListener("click", () => uploadFile());
