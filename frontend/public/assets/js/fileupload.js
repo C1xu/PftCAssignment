@@ -1,4 +1,5 @@
 const uploadFile = async () => {
+    console.log("Button pressed");
     const fileUpload = document.getElementById("fileInput").files[0];
     if (fileUpload) {
       var formData = new FormData();
