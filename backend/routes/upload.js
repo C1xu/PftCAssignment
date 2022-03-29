@@ -4,6 +4,7 @@ const upload = Express.Router();
 
 upload.route("/").post((req, res) => {
 
+    console.log("Upload button pressed");
     let base64String = "";
     var reader = new FileReader();
 
