@@ -4,6 +4,8 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import https from "https";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
+import auth from "./routes/auth.js";
+import upload from "./routes/upload.js";
 
 const PORT = 443; //Https port 
 const PORTnoS = 80; //80 Http port
@@ -61,6 +63,10 @@ const startServerEncrypted = async () => {
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
+
+app.use("auth", auth)
+
+app.use("upload", upload)
 
 // app.get("/login", (req, res) => {
 //   res.sendFile(path.join(__dirname, "../frontend/login.html"));

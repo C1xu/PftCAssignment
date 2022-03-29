@@ -10,12 +10,12 @@
       crossorigin="anonymous"
     />
 
-    <title>Lunchtime!</title>
+    <title>PDF Changer</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/">LunchTime</a>
+        <a class="navbar-brand" href="/">PDF Changer</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -32,24 +32,69 @@
             <li class="nav-item">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
             </li>
-            <li class="nav-item">
-              <a id="signIn" class="nav-link" href="#">Sign In</a>
-              <a id="signOut" class="nav-link" href="#" hidden="true"
-                >Sign Out</a
-              >
-            </li>
           </ul>
+          <div
+            class="d-flex align-items-center justify-content-end"
+            style="margin-left: auto"
+          >
+            <ul id="signInContainer" class="navbar-nav" style="display: none">
+              <li class="nav-item">
+                <a id="signIn" class="nav-link active" href="#">Sign In</a>
+              </li>
+            </ul>
+
+            <div id="profile" class="nav-item dropdown" style="display: none">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="color: white"
+              >
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" id="signOut" href="#">Sign Out</a>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
 
     <section>
-      <img
-        src="https://images.unsplash.com/photo-1642337243192-82eccda657de?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-        class="img-fluid"
-        alt="Very good food!"
-        width="100%"
-      />
+      <div class="container-fluid" style="height: 88.5vh">
+        <div
+          class="row justify-content-center m-3m align-items-center"
+          style="height: 100%"
+        >
+          <div class="col-auto justify-content-center">
+            <input
+              id="fileInput"
+              class="form-control"
+              type="file"
+              id="formFile"
+              accept="image/*"
+            />
+          </div>
+          <div class="col-auto justify-content-center">
+            <button
+              id="convert"
+              type="button"
+              class="btn btn-primary"
+              onclick="uploadFile()"
+            >
+              Convert
+            </button>
+          </div>
+        </div>
+      </div>
     </section>
 
     <footer class="bg-light text-center text-lg-start">
@@ -67,6 +112,7 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./assets/js/index.js"></script>
+    <script src="./assets/js/fileUpload.js"></script>
     <script
       src="https://apis.google.com/js/platform.js?onload=loadGoogleLogin"
       async
