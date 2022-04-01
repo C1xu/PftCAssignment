@@ -2,7 +2,7 @@ import Express from "express";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
-import {Storage} from ('@google-cloud/storage');
+import {Storage} from '@google-cloud/storage';
 
 // The ID of your GCS bucket
 const bucketName = 'pftcxu.appspot.com/pending';
