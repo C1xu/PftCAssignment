@@ -6,8 +6,7 @@ import {Storage} from '@google-cloud/storage';
 
 // The ID of your GCS bucket
 const bucketName = 'pftcxu.appspot.com/pending';
-// The path to your file to upload
-const filePath = '../uploads/';
+
 // The new ID for your GCS file
 const destFileName = 'test1';
 
@@ -38,8 +37,8 @@ let imageUpload = multer({
   },
 });
 
-async function uploadToBucket() {
-    await storage.bucket(bucketName).upload(filePath, {
+async function uploadToBucket(filePath) {
+    await storage.bucket(bucketName).upload(filePath , {
         destination: destFileName,
     });
     console.log(`${filePath} uploaded to ${bucketName}`);
@@ -49,7 +48,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     if(req.file){
         console.log("File downloaded at: " + req.file.path);
         
-        uploadToBucket().catch(console.error);
+        uploadToBucket(req.file.path).catch(console.error);
 
         // let base64String = "";
         // var reader = new FileReader();
