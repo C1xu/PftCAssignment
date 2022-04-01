@@ -2,18 +2,15 @@ import Express from "express";
 import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
+import {Storage} from ('@google-cloud/storage');
 
 // The ID of your GCS bucket
 const bucketName = 'pftcxu.appspot.com/pending';
-
 // The path to your file to upload
 const filePath = '../uploads/';
-
 // The new ID for your GCS file
 const destFileName = 'test1';
 
-// Imports the Google Cloud Node.js client library
-const {Storage} = require('@google-cloud/storage');
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const storage = new Storage();
