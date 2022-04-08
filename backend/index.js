@@ -4,8 +4,10 @@ import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import https from "https";
 import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
+
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
+import home from "./routes/home.js";
 
 const PORT = 443; //Https port 
 const PORTnoS = 80; //80 Http port
@@ -53,7 +55,7 @@ const startServerEncrypted = async () => {
     cert: pub.payload.data.toString(),
   };
 
-  console.log(sslOptions);
+  //console.log(sslOptions);
 
   https.createServer(sslOptions, app).listen(PORT, () => {
     console.log("Secure Server Listening on port:" + PORT);
@@ -68,5 +70,7 @@ app.use("/auth", auth)
 
 app.use("/upload", upload)
 
-//startServer();
-startServerEncrypted();
+app.use("/home", home)
+
+startServer();
+//startServerEncrypted();

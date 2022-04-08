@@ -9,17 +9,9 @@ export default auth;
 
 auth.route("/").post((req, res) => {
   const token = req.query.token;
-  client
-    .verifyIdToken({
-      idToken: token,
-      audience: CLIENT_ID,
-    })
-    .catch((error) => {
-      console.log(error);
-      res.send({ status: "401" });
-    })
+  validateToken(token)
     .then((ticket) => {
-      if (ticket) {
+      if (ticket.getPayload().name != null) {
         const payload = ticket.getPayload();
         res.send({
           status: "200",
@@ -33,5 +25,17 @@ auth.route("/").post((req, res) => {
       } else {
         res.send({ status: "401" });
       }
-    });
+    })
+    .catch((error) => {
+      //console.log(error);
+      console.log("Token timeout")
+      res.send({ status: "401" });
+    })
 });
+
+export const validateToken = async (token) => {
+  return await client.verifyIdToken({
+    idToken: token,
+    audience: CLIENT_ID
+  });
+}
