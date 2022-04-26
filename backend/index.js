@@ -61,6 +61,12 @@ if (!DEV) {
   });
 }
 
+//serve static files
+app.use(Express.static(path.join(__dirname, "../frontend/public")));
+
+//allow cross-origin reqs
+app.use(cors());
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });
