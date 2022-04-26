@@ -41,7 +41,7 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
     if(req.file){
         console.log("File downloaded at: " + req.file.path);
         
-        uploadToBucket(req.file).catch(console.error);
+        uploadToBucket(req.file.path).catch(console.error);
         
         res.send({
             status: "200",
