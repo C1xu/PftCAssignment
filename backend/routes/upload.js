@@ -7,7 +7,7 @@ import {Storage} from '@google-cloud/storage';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const storage = new Storage();
+const storage = new Storage.Storage({projectId: 'pftcxu', keyFilename: './key.json'});
 
 const upload = Express.Router();
 
@@ -43,22 +43,6 @@ upload.route("/").post(imageUpload.single("image"), (req, res) => {
         console.log("File downloaded at: " + req.file.path);
         
         uploadToBucket(req.file).catch(console.error);
-
-        // let base64String = "";
-        // var reader = new FileReader();
-
-        // reader.onload = function () {
-        //     base64String = reader.result.replace("data:", "")
-        //         .replace(/^.+,/, "");
-    
-        //     imageBase64Stringsep = base64String;
-    
-        //     console.log(base64String);
-        // }
-        // reader.readAsDataURL(req.query.formData);
-        
-        let bufferObj = Buffer.from(req, "utf8");
-        let base64String = bufferObj.toString("base64");
         
         res.send({
             status: "200",
