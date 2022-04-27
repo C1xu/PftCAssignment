@@ -37,13 +37,13 @@ const authenticateReq = async (token) => {
 };
 
 function goToCredits(){
-  document.getElementById("convertSection").disabled = true;
-  document.getElementById("creditsSection").disabled = false;
+  document.getElementById("convertSection").style="display:none";
+  document.getElementById("creditsSection").style="display:inline";
 }
 
 function goToConvert(){
-  document.getElementById("convertSection").disabled = false;
-  document.getElementById("creditsSection").disabled = true;
+  document.getElementById("convertSection").style="display:inline";
+  document.getElementById("creditsSection").style="display:none";
 }
 
 async function loadGoogleLogin() {

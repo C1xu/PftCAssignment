@@ -69,9 +69,9 @@
       </div>
     </nav>
 
-    <section id="convertSection">
+    <section id="convertSection" style="display: inline">
       <div class="container-fluid" style="height: 88.5vh">
-        <button id="GoToCreditsButton" type="button" class="btn btn-success">Credits</button>
+        <button id="GoToCreditsButton" type="button" class="btn btn-success" onclick="goToCredits">Credits</button>
         <div
           class="row justify-content-center m-3m align-items-center"
           style="height: 100%"
@@ -85,10 +85,10 @@
         </div>
       </div>
     </section>
-    
-    <section id="creditsSection">
+
+    <section id="creditsSection" style="display: none">
       <div class="container-fluid" style="height: 88.5vh">
-        <button id="GoToConvertButton" type="button" class="btn btn-success">Convert</button>
+        <button id="GoToConvertButton" type="button" class="btn btn-success" onclick="goToConvert">Convert</button>
         <div
           class="row justify-content-center m-3m align-items-center"
           style="height: 100%"
