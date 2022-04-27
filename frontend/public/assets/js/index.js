@@ -20,7 +20,7 @@ const authenticateReq = async (token) => {
     profile.style.display = "inline";
     signInContainer.style.display = "none";
 
-    document.getElementById("home-container").innerHTML = '<a class="nav-link active" aria-current="page" href="/frontend/credits?token=${token}">Credits</a>'
+    document.getElementById("home-container").innerHTML = '<a class="nav-link active" aria-current="page"></a>'
     document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>'
     document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
     document.getElementById("navbarDropdownMenuLink").innerHTML =
