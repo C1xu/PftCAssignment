@@ -31,17 +31,14 @@ let imageUpload = multer({
   },
 });
 
-async function uploadToBucket(file) {
-    await storage.bucket("pftcxu.appspot.com").upload(file , {
-        destination: "pending/" + file.originalname,
-    });
-}
-
-upload.route("/").post(imageUpload.single("image"), (req, res) => {
+upload.route("/").post(imageUpload.single("image"), async function (req, res){
     if(req.file){
         console.log("File downloaded at: " + req.file.path);
-        
-        uploadToBucket(req.file.path).catch(console.error);
+
+        //Upload to google cloud
+        await storage.bucket("pftcxu.appspot.com").upload(req.file.path, {
+          destination: "pending/" + req.file.originalname,
+        });
         
         res.send({
             status: "200",
