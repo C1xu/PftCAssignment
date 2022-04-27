@@ -33,7 +33,7 @@ let imageUpload = multer({
 
 async function uploadToBucket(file) {
     await storage.bucket("pftcxu.appspot.com").upload(file , {
-        destination: "pending/" + file.originalname,
+        destination: "pending/" + file.path.originalname,
     });
 }
 
