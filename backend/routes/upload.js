@@ -52,7 +52,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
           "api_key": PDF_API_KEY,
           "image": base64file,
         }
-        const response = axios.post(url,headers); 
+        const response = await axios.post(url,headers); 
         console.log(response);
 
         res.send({
@@ -60,7 +60,6 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
             message: "File uploaded successfully! Processing..",
         });
     }
-    //send it to getoutpdf API
 });
   
 export default upload;
