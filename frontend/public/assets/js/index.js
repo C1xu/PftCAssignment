@@ -36,6 +36,16 @@ const authenticateReq = async (token) => {
   }
 };
 
+function goToCredits(){
+  document.getElementById("convertSection").disabled = true;
+  document.getElementById("creditsSection").disabled = false;
+}
+
+function goToConvert(){
+  document.getElementById("convertSection").disabled = false;
+  document.getElementById("creditsSection").disabled = true;
+}
+
 async function loadGoogleLogin() {
   let session = document.cookie;
   if (session && session.includes("token")) {
