@@ -54,6 +54,8 @@ async function loadGoogleLogin() {
         profile.style.display = "none";
         signInContainer.style.display = "inline";
         document.getElementById("home-container").innerHTML = '';
+        document.getElementById("inputConvertFileDiv").innerHTML = '';
+        document.getElementById("inputConvertFileButton").innerHTML = '';
         console.log("User signed out.");
       })
       .catch((error) => alert(error));
