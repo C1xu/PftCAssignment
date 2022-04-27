@@ -13,10 +13,41 @@ const db = new Firestore({
 
 rclient.on("connect", () => {
   console.log("Redis connected!");
-  getCredits().then((data) => console.log(JSON.parse(data)));
+  getCreditsInfo().then((data) => console.log(JSON.parse(data)));
 })
 
-const getCredits = async () => {
+export async function CreateUser(email){
+  const docRef = db.collection("userData").doc();
+  return await docRef.set({
+    credits: 10,
+    email: email,
+    admin: false,
+  });
+}
+
+export async function GetUser(email){
+  const docRef = db.collection("userData");
+  const snapshot = await docRef.where("email", "==", email).get();
+  let data = [];
+  snapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+
+  if(data.length > 0){
+    userCredits = data[0].credits;
+    adminInfo = data[0].admin;
+  }
+}
+
+export async function GetUserCredits(){
+  return userCredits;
+}
+
+export async function GetUserAdminInfo(){
+  return adminInfo;
+}
+
+const getCreditsInfo = async () => {
   return rclient.get("credits");
 }
 
