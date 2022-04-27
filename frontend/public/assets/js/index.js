@@ -21,7 +21,7 @@ const authenticateReq = async (token) => {
     signInContainer.style.display = "none";
 
     document.getElementById("home-container").innerHTML = '<a class="nav-link active" aria-current="page" href="/home?token=${token}">Home</a>'
-    document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*" onchange="encode()"/>'
+    document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>'
     document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
     document.getElementById("navbarDropdownMenuLink").innerHTML =
       `<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>` + name;

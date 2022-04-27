@@ -3,6 +3,9 @@ import multer from "multer";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
 import * as Storage from "@google-cloud/storage";
+import fs from "fs";
+import axios from "axios";
+import { PDF_API_KEY } from "backend\index.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -40,14 +43,23 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
           destination: "pending/" + req.file.originalname,
         });
         
+        //Convert to base64
+        var base64file =  fs.readFileSync(req.file.path, 'base64');
+
+        //Send to API
+        const url = "https://getoutpdf.com/api/convert/image-to-pdf"
+        const headers = {
+          "api_key": PDF_API_KEY,
+          "image": base64file,
+        }
+        const response = axios.post(url,headers); 
+        console.log(response);
+
         res.send({
             status: "200",
             message: "File uploaded successfully! Processing..",
         });
     }
-    //receive the image  Done?
-    //convert it to base64  Done?
-    //save it in cloud storage
     //send it to getoutpdf API
 });
   
