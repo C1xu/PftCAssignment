@@ -15,7 +15,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: darkmagenta;">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"><h2>PDF Changer</h2></a>
+        <a class="navbar-brand" href="/home?token=${token}"><h2>PDF Changer</h2></a>
         <button
           class="navbar-toggler"
           type="button"
@@ -39,7 +39,7 @@
           >
             <ul id="signInContainer" class="navbar-nav" style="display: none">
               <li class="nav-item">
-                <a id="signIn" class="nav-link active" href="#">Sign In</a>
+                <a id="signIn" class="nav-link active" href="/home?token=${token}">Sign In</a>
               </li>
             </ul>
 
@@ -102,7 +102,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./assets/js/index.js"></script>
     <script src="./assets/js/fileupload.js"></script>
-    <script src="./assets/js/encode.js"></script>
     <script
       src="https://apis.google.com/js/platform.js?onload=loadGoogleLogin"
       async
