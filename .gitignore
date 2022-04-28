@@ -3,4 +3,5 @@
 /cloudfunction/node_modules
 /backend/key.json
 /cloudfunction/key.json
+/cloudfunction/cloudFunctionPubSub.zip
 .DS_Store
