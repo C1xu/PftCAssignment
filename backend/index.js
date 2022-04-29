@@ -11,7 +11,7 @@ import home from "./routes/home.js";
 import clean from "./routes/home.js";
 import { setTenPrice } from "./db.js";
 
-const DEV = true;
+const DEV = false;
 const PORT = DEV ? 80 : 443;
 
 const __filename = fileURLToPath(import.meta.url);
