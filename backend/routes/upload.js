@@ -84,7 +84,8 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
        
 
         //Convert back to file
-        var convertedFile = buf.toUTCString(response_64);
+        var convertedFile = Buffer.from(response_64).toString('ascii');
+        console.log(convertedFile);
 
 
         // var convertedFile = fs.writeFile(req.file.originalname, response_64, {encoding: 'base64'}, function(err) {
