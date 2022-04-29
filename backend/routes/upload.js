@@ -84,7 +84,7 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
        
 
         //Convert back to file
-        var convertedFile = Buffer.from(response_64).toString('ascii');
+        var convertedFile = Buffer.from("" + response_64, 'base64').toString('ascii');
         console.log(convertedFile);
 
 
@@ -93,7 +93,8 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
         // });
 
         //Upload to google cloud, completed bucket
-        await storage.bucket("pftcxu.appspot.com").file("completed/" + req.file.originalname.substring(0, req.file.originalname.lastIndexOf(".")) + ".pdf").save(convertedFile);
+        await storage.bucket("pftcxu.appspot.com").file("completed/test.pdf").save(convertedFile);
+        //file("completed/" + req.file.originalname.substring(0, req.file.originalname.lastIndexOf(".")) + ".pdf").save(convertedFile);
         
         res.send({
             status: "200",
