@@ -3,13 +3,13 @@ import Firestore from "@google-cloud/firestore";
 import Redis from "redis";
 //import { REPL_MODE_STRICT } from "repl";
 
-export let rclient = new Redis.createClient({
-  host: 'www.c1xu.me',
-  port: '443',
-  TLS: true,
-});
+// export let rclient = new Redis.createClient({
+//   host: 'www.c1xu.me',
+//   port: '443',
+//   TLS: true,
+// });
 
-// export let rclient = new Redis.createClient();
+export let rclient = new Redis.createClient();
 
 //Instantiating Firestore with project details
 const db = new Firestore({
@@ -17,16 +17,12 @@ const db = new Firestore({
   keyFilename: "./key.json",
 });
 
-rclient.connect();
-
 rclient.on("connect", () => {
   console.log("Redis connected!");
   getTenPrice().then((data) => console.log(JSON.parse(data)));
   getTwentyPrice().then((data) => console.log(JSON.parse(data)));
   getThirtyPrice().then((data) => console.log(JSON.parse(data)));
 })
-
-
 
 export async function CreateUser(email) {
   const docRef = db.collection("userData").doc();
@@ -59,27 +55,30 @@ export async function GetUserAdminInfo() {
   return adminInfo;
 }
 
-const getTenPrice = async () => {
+export async function getTenPrice() {
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
   return rclient.get("tenPrice");
 }
 
-const setTenPrice = async (payload) => {
+export async function setTenPrice(payload){
   return await rclient.set("tenPrice", JSON.stringify(payload));
 }
 
-const getTwentyPrice = async () => {
+export async function getTwentyPrice(){
   return rclient.get("twentyPrice");
 }
 
-const setTwentyPrice = async (payload) => {
+export async function setTwentyPrice(payload){
   return await rclient.set("twentyPrice", JSON.stringify(payload));
 }
 
-const getThirtyPrice = async () => {
+export async function getThirtyPrice(){
   return rclient.get("thirtyPrice");
 }
 
-const setThirtyPrice = async (payload) => {
+export async function setThirtyPrice(payload){
   return await rclient.set("thirtyPrice", JSON.stringify(payload));
 }
 

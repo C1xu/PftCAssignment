@@ -1,3 +1,5 @@
+const { getTenPrice, getTwentyPrice, getThirtyPrice, setTenPrice } = require("../../../../backend/db");
+
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
 let profile = document.getElementById("profile");
@@ -28,9 +30,10 @@ const authenticateReq = async (token) => {
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
     document.getElementById("creditsDiv").innerHTML = 
     `
-    <button type="button" class="btn btn-primary launch" onclick="Charge10()"> <i class="fa fa-rocket"></i> 10 Credits </button>
-    <button type="button" class="btn btn-primary launch"> <i class="fa fa-rocket"></i> 20 Credits </button>
-    <button type="button" class="btn btn-primary launch"> <i class="fa fa-rocket"></i> 30 Credits </button>
+    <button type="button" class="btn btn-primary launch" onclick="setTen()"> <i class="fa fa-rocket"></i> Set 10 </button>
+    <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
+    <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
+    <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
 
     <span id="costText"> Cost </span>
     `
@@ -57,15 +60,23 @@ function goToConvert(){
 
 //Set Price dependant on redis price set by admin
 function tenCredits(){
-  document.getElementById("costText").innerHTML = "Cost = $10";
+  var price = getTenPrice();
+  document.getElementById("costText").innerText = "Cost = $" + price;
 }
 
 function twentyCredits(){
-  document.getElementById("costText").innerHTML = "Cost = $15";
+  var price = getTwentyPrice();
+  document.getElementById("costText").innerText = "Cost = $" + price;
 }
 
 function thirtyCredits(){
-  document.getElementById("costText").innerHTML = "Cost = $20";
+  var price = getThirtyPrice();
+  document.getElementById("costText").innerText = "Cost = $" + price;
+}
+
+function setTen(){
+  var price = document.getElementById("adminChangeTen").innerText;
+  setTenPrice(price);
 }
 
 async function loadGoogleLogin() {
