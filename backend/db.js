@@ -4,7 +4,7 @@ import Redis from "redis";
 import { REPL_MODE_STRICT } from "repl";
 
 export let rclient = new Redis.createClient({
-  host: 'https://c1xu.me',
+  host: 'www.c1xu.me',
   port: '443',
   TLS: true,
 });
