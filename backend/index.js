@@ -9,6 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
 import clean from "./routes/home.js";
+import { setTenPrice } from "./db.js";
 
 const DEV = true;
 const PORT = DEV ? 80 : 443;
@@ -79,5 +80,9 @@ app.use("/upload", upload)
 app.use("/clean", clean)
 
 app.use("/home", home)
+
+app.post('/setTenPrice', (req, res) => {
+  setTenPrice(req.query);
+})
 
 startServer();

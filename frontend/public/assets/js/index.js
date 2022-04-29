@@ -1,4 +1,4 @@
-import { getTenPrice, getTwentyPrice, getThirtyPrice, setTenPrice } from "../../../../backend/db.js";
+//import { getTenPrice, getTwentyPrice, getThirtyPrice, setTenPrice } from "../../../../backend/db.js";
 
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
@@ -77,6 +77,15 @@ function thirtyCredits(){
 function setTen(){
   var price = document.getElementById("adminChangeTen").innerText;
   setTenPrice(price);
+  axios.post("/setTenPrice", {
+    Price: price
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
 }
 
 async function loadGoogleLogin() {
