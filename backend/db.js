@@ -70,18 +70,30 @@ export async function setTenPrice(payload){
 }
 
 export async function getTwentyPrice(){
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
   return rclient.get("twentyPrice");
 }
 
 export async function setTwentyPrice(payload){
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
   return await rclient.set("twentyPrice", JSON.stringify(payload));
 }
 
 export async function getThirtyPrice(){
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
   return rclient.get("thirtyPrice");
 }
 
 export async function setThirtyPrice(payload){
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
   return await rclient.set("thirtyPrice", JSON.stringify(payload));
 }
 

@@ -9,7 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
 import clean from "./routes/home.js";
-import { setTenPrice } from "./db.js";
+import { setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
 
 const DEV = false;
 const PORT = DEV ? 80 : 443;
@@ -84,5 +84,17 @@ app.use("/home", home)
 app.post('/setTenPrice', (req, res) => {
   setTenPrice(req.body);
 })
+
+app.post('/setTwentyPrice', (req, res) => {
+  setTwentyPrice(req.body);
+})
+
+app.post('/setThirtyPrice', (req, res) => {
+  setThirtyPrice(req.body);
+})
+
+// app.post('/getTenPrice', (req, res) => {
+
+// })
 
 startServer();

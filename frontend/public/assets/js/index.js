@@ -31,9 +31,6 @@ const authenticateReq = async (token) => {
     document.getElementById("creditsDiv").innerHTML = 
     `
     <div>
-      <button type="button" class="btn btn-primary launch" onclick="setTen()"> <i class="fa fa-rocket"></i> Set 10 </button>
-    </div>
-    <div>
       <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
       <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
       <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
@@ -41,9 +38,22 @@ const authenticateReq = async (token) => {
     <div>
       <span id="costText"> Cost </span>
     </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text">$</span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTen">
+    <div id="adminDiv">
+      <div class="input-group mb-3">
+        <span class="input-group-text">$</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTen">
+          <button type="button" class="btn btn-primary launch" onclick="setTen()"> <i class="fa fa-rocket"></i> Set 10 </button>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">$</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTwenty">
+          <button type="button" class="btn btn-primary launch" onclick="setTwenty()"> <i class="fa fa-rocket"></i> Set 20 </button>
+      </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text">$</span>
+          <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeThirty">
+          <button type="button" class="btn btn-primary launch" onclick="setThirty()"> <i class="fa fa-rocket"></i> Set 30 </button>
+      </div>
     </div>
     `
     document.getElementById("picture").src = picture;
@@ -86,6 +96,32 @@ function thirtyCredits(){
 function setTen(){
   var price = document.getElementById("adminChangeTen").innerText;
   axios.post("/setTenPrice", {
+    Price: price
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+function setTwenty(){
+  var price = document.getElementById("adminChangeTwenty").innerText;
+  axios.post("/setTwentyPrice", {
+    Price: price
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+function setThirty(){
+  var price = document.getElementById("adminChangeThirty").innerText;
+  axios.post("/setThirtyPrice", {
     Price: price
   })
   .then(function (response) {
