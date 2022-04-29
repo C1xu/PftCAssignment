@@ -27,86 +27,45 @@ const authenticateReq = async (token) => {
     document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
     document.getElementById("creditsDiv").innerHTML = 
-    `<div class="row mb-4">
-    <div class="col-lg-8 mx-auto text-center">
-        <h1 class="display-6">Bootstrap Payment Forms</h1>
-    </div>
-</div> <!-- End -->
-<div class="row">
-    <div class="col-lg-6 mx-auto">
-        <div class="card ">
-            <div class="card-header">
-                <div class="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
-                    <!-- Credit card form tabs -->
-                    <ul role="tablist" class="nav bg-light nav-pills rounded nav-fill mb-3">
-                        <li class="nav-item"> <a data-toggle="pill" href="#credit-card" class="nav-link active "> <i class="fas fa-credit-card mr-2"></i> Credit Card </a> </li>
-                        <li class="nav-item"> <a data-toggle="pill" href="#paypal" class="nav-link "> <i class="fab fa-paypal mr-2"></i> Paypal </a> </li>
-                        <li class="nav-item"> <a data-toggle="pill" href="#net-banking" class="nav-link "> <i class="fas fa-mobile-alt mr-2"></i> Net Banking </a> </li>
-                    </ul>
-                </div> <!-- End -->
-                <!-- Credit card form content -->
-                <div class="tab-content">
-                    <!-- credit card info-->
-                    <div id="credit-card" class="tab-pane fade show active pt-3">
-                        <form role="form" onsubmit="event.preventDefault()">
-                            <div class="form-group"> <label for="username">
-                                    <h6>Card Owner</h6>
-                                </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control "> </div>
-                            <div class="form-group"> <label for="cardNumber">
-                                    <h6>Card number</h6>
-                                </label>
-                                <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required>
-                                    <div class="input-group-append"> <span class="input-group-text text-muted"> <i class="fab fa-cc-visa mx-1"></i> <i class="fab fa-cc-mastercard mx-1"></i> <i class="fab fa-cc-amex mx-1"></i> </span> </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <div class="form-group"> <label><span class="hidden-xs">
-                                                <h6>Expiration Date</h6>
-                                            </span></label>
-                                        <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required> <input type="number" placeholder="YY" name="" class="form-control" required> </div>
+    `<button type="button" class="btn btn-primary launch" data-toggle="modal" data-target="#staticBackdrop"> <i class="fa fa-rocket"></i> Pay Now
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="text-right"> <i class="fa fa-close close" data-dismiss="modal"></i> </div>
+                    <div class="tabs mt-3">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation"> <a class="nav-link active" id="visa-tab" data-toggle="tab" href="#visa" role="tab" aria-controls="visa" aria-selected="true"> <img src="https://i.imgur.com/sB4jftM.png" width="80"> </a> </li>
+                            <li class="nav-item" role="presentation"> <a class="nav-link" id="paypal-tab" data-toggle="tab" href="#paypal" role="tab" aria-controls="paypal" aria-selected="false"> <img src="https://i.imgur.com/yK7EDD1.png" width="80"> </a> </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="visa" role="tabpanel" aria-labelledby="visa-tab">
+                                <div class="mt-4 mx-4">
+                                    <div class="text-center">
+                                        <h5>Credit card</h5>
+                                    </div>
+                                    <div class="form mt-3">
+                                        <div class="inputbox"> <input type="text" name="name" class="form-control" required="required"> <span>Cardholder Name</span> </div>
+                                        <div class="inputbox"> <input type="text" name="name" min="1" max="999" class="form-control" required="required"> <span>Card Number</span> <i class="fa fa-eye"></i> </div>
+                                        <div class="d-flex flex-row">
+                                            <div class="inputbox"> <input type="text" name="name" min="1" max="999" class="form-control" required="required"> <span>Expiration Date</span> </div>
+                                            <div class="inputbox"> <input type="text" name="name" min="1" max="999" class="form-control" required="required"> <span>CVV</span> </div>
+                                        </div>
+                                        <div class="px-5 pay"> <button class="btn btn-success btn-block">Add card</button> </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
-                                            <h6>CVV <i class="fa fa-question-circle d-inline"></i></h6>
-                                        </label> <input type="text" required class="form-control"> </div>
+                            </div>
+                            <div class="tab-pane fade" id="paypal" role="tabpanel" aria-labelledby="paypal-tab">
+                                <div class="px-5 mt-5">
+                                    <div class="inputbox"> <input type="text" name="name" class="form-control" required="required"> <span>Paypal Email Address</span> </div>
+                                    <div class="pay px-5"> <button class="btn btn-primary btn-block">Add paypal</button> </div>
                                 </div>
                             </div>
-                            <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button>
-                        </form>
+                        </div>
                     </div>
-                </div> <!-- End -->
-                <!-- Paypal info -->
-                <div id="paypal" class="tab-pane fade pt-3">
-                    <h6 class="pb-2">Select your paypal account type</h6>
-                    <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio" checked> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5">International </label></div>
-                    <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
-                    <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-                </div> <!-- End -->
-                <!-- bank transfer info -->
-                <div id="net-banking" class="tab-pane fade pt-3">
-                    <div class="form-group "> <label for="Select Your Bank">
-                            <h6>Select your Bank</h6>
-                        </label> <select class="form-control" id="ccmonth">
-                            <option value="" selected disabled>--Please select your Bank--</option>
-                            <option>Bank 1</option>
-                            <option>Bank 2</option>
-                            <option>Bank 3</option>
-                            <option>Bank 4</option>
-                            <option>Bank 5</option>
-                            <option>Bank 6</option>
-                            <option>Bank 7</option>
-                            <option>Bank 8</option>
-                            <option>Bank 9</option>
-                            <option>Bank 10</option>
-                        </select> </div>
-                    <div class="form-group">
-                        <p> <button type="button" class="btn btn-primary "><i class="fas fa-mobile-alt mr-2"></i> Proceed Payment</button> </p>
-                    </div>
-                    <p class="text-muted">Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
-                </div> <!-- End -->
-                <!-- End -->
+                </div>
             </div>
         </div>
     </div>`
