@@ -82,7 +82,7 @@ app.use("/clean", clean)
 app.use("/home", home)
 
 app.post('/setTenPrice', (req, res) => {
-  setTenPrice(req.query);
+  setTenPrice(req.body);
 })
 
 startServer();
