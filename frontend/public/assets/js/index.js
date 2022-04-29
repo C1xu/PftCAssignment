@@ -6,9 +6,8 @@ let signInContainer = document.getElementById("signInContainer");
 //import { CreateUser, GetUser } from "../../../../backend/db";
 import { rConnect } from "../../../../backend/db";
 
-rConnect();
-
 const authenticateReq = async (token) => {
+  rConnect();
   const url = `/auth?token=${token}`;
   const headers = {
     "Content-Type": "text/html",
