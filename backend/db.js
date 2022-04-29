@@ -3,13 +3,13 @@ import { createHmac } from "crypto";
 import Redis from "redis";
 import { REPL_MODE_STRICT } from "repl";
 
-// export let rclient = new Redis.createClient({
-//   host: 'c1xu.me',
-//   port: '443',
-//   TLS: true,
-// });
+export let rclient = new Redis.createClient({
+  host: 'https://c1xu.me',
+  port: '443',
+  TLS: true,
+});
 
-export let rclient = new Redis.createClient();
+//export let rclient = new Redis.createClient();
 
 //Instantiating Firestore with project details
 const db = new Firestore({
