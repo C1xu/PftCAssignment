@@ -1,16 +1,15 @@
 import Firestore from "@google-cloud/firestore";
-import { createHmac } from "crypto";
+//import { createHmac } from "crypto";
 import Redis from "redis";
-import { REPL_MODE_STRICT } from "repl";
+//import { REPL_MODE_STRICT } from "repl";
 
-// export let rclient = new Redis.createClient({
-//   host: 'www.c1xu.me',
-//   port: '443',
-//   TLS: true,
-// });
+export let rclient = new Redis.createClient({
+  host: 'www.c1xu.me',
+  port: '443',
+  TLS: true,
+});
 
-export let rclient = new Redis.createClient();
-rConnect();
+// export let rclient = new Redis.createClient();
 
 //Instantiating Firestore with project details
 const db = new Firestore({
@@ -18,17 +17,16 @@ const db = new Firestore({
   keyFilename: "./key.json",
 });
 
-export async function rConnect() {
-  rclient.connect();
+rclient.connect();
 
-  rclient.on("connect", () => {
-    console.log("Redis connected!");
-    getTenPrice().then((data) => console.log(JSON.parse(data)));
-    getTwentyPrice().then((data) => console.log(JSON.parse(data)));
-    getThirtyPrice().then((data) => console.log(JSON.parse(data)));
-  })
+rclient.on("connect", () => {
+  console.log("Redis connected!");
+  getTenPrice().then((data) => console.log(JSON.parse(data)));
+  getTwentyPrice().then((data) => console.log(JSON.parse(data)));
+  getThirtyPrice().then((data) => console.log(JSON.parse(data)));
+})
 
-}
+
 
 export async function CreateUser(email) {
   const docRef = db.collection("userData").doc();
