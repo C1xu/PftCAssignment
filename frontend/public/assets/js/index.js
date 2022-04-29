@@ -85,7 +85,6 @@ function thirtyCredits(){
 
 function setTen(){
   var price = document.getElementById("adminChangeTen").innerText;
-  setTenPrice(price);
   axios.post("/setTenPrice", {
     Price: price
   })
