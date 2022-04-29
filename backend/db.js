@@ -3,7 +3,10 @@ import { createHmac } from "crypto";
 import Redis from "redis";
 import { REPL_MODE_STRICT } from "repl";
 
-export let rclient = new Redis.createClient();
+export let rclient = new Redis.createClient({
+  host: 'c1xu.me',
+  port: '443',
+});
 
 //Instantiating Firestore with project details
 const db = new Firestore({
@@ -11,9 +14,13 @@ const db = new Firestore({
   keyFilename: "./key.json",
 });
 
+rclient.connect();
+
 rclient.on("connect", () => {
   console.log("Redis connected!");
-  getCreditsInfo().then((data) => console.log(JSON.parse(data)));
+  getTenPrice().then((data) => console.log(JSON.parse(data)));
+  getTwentyPrice().then((data) => console.log(JSON.parse(data)));
+  getThirtyPrice().then((data) => console.log(JSON.parse(data)));
 })
 
 export async function CreateUser(email){
@@ -47,12 +54,28 @@ export async function GetUserAdminInfo(){
   return adminInfo;
 }
 
-const getCreditsInfo = async () => {
-  return rclient.get("credits");
+const getTenPrice = async () => {
+  return rclient.get("tenPrice");
 }
 
-const setCredits = async (payload) => {
-  return await rclient.set("credits", JSON.stringify(payload));
+const setTenPrice = async (payload) => {
+  return await rclient.set("tenPrice", JSON.stringify(payload));
+}
+
+const getTwentyPrice = async () => {
+  return rclient.get("twentyPrice");
+}
+
+const setTwentyPrice = async (payload) => {
+  return await rclient.set("twentyPrice", JSON.stringify(payload));
+}
+
+const getThirtyPrice = async () => {
+  return rclient.get("thirtyPrice");
+}
+
+const setThirtyPrice = async (payload) => {
+  return await rclient.set("thirtyPrice", JSON.stringify(payload));
 }
 
 //Collection (Table)
