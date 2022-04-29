@@ -4,6 +4,9 @@ let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 
 //import { CreateUser, GetUser } from "../../../../backend/db";
+import { rConnect } from "../../../../backend/db";
+
+rConnect();
 
 const authenticateReq = async (token) => {
   const url = `/auth?token=${token}`;

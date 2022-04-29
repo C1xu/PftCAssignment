@@ -3,11 +3,13 @@ import { createHmac } from "crypto";
 import Redis from "redis";
 import { REPL_MODE_STRICT } from "repl";
 
-export let rclient = new Redis.createClient({
-  host: 'c1xu.me',
-  port: '443',
-  TLS: true,
-});
+// export let rclient = new Redis.createClient({
+//   host: 'c1xu.me',
+//   port: '443',
+//   TLS: true,
+// });
+
+export let rclient = new Redis.createClient();
 
 //Instantiating Firestore with project details
 const db = new Firestore({
@@ -15,16 +17,19 @@ const db = new Firestore({
   keyFilename: "./key.json",
 });
 
-rclient.connect();
+export async function rConnect() {
+  rclient.connect();
 
-rclient.on("connect", () => {
-  console.log("Redis connected!");
-  getTenPrice().then((data) => console.log(JSON.parse(data)));
-  getTwentyPrice().then((data) => console.log(JSON.parse(data)));
-  getThirtyPrice().then((data) => console.log(JSON.parse(data)));
-})
+  rclient.on("connect", () => {
+    console.log("Redis connected!");
+    getTenPrice().then((data) => console.log(JSON.parse(data)));
+    getTwentyPrice().then((data) => console.log(JSON.parse(data)));
+    getThirtyPrice().then((data) => console.log(JSON.parse(data)));
+  })
 
-export async function CreateUser(email){
+}
+
+export async function CreateUser(email) {
   const docRef = db.collection("userData").doc();
   return await docRef.set({
     credits: 10,
@@ -33,7 +38,7 @@ export async function CreateUser(email){
   });
 }
 
-export async function GetUser(email){
+export async function GetUser(email) {
   const docRef = db.collection("userData");
   const snapshot = await docRef.where("email", "==", email).get();
   let data = [];
@@ -41,17 +46,17 @@ export async function GetUser(email){
     data.push(doc.data());
   });
 
-  if(data.length > 0){
+  if (data.length > 0) {
     userCredits = data[0].credits;
     adminInfo = data[0].admin;
   }
 }
 
-export async function GetUserCredits(){
+export async function GetUserCredits() {
   return userCredits;
 }
 
-export async function GetUserAdminInfo(){
+export async function GetUserAdminInfo() {
   return adminInfo;
 }
 
