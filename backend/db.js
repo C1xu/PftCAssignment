@@ -6,6 +6,7 @@ import { REPL_MODE_STRICT } from "repl";
 export let rclient = new Redis.createClient({
   host: 'c1xu.me',
   port: '443',
+  tls: 'true',
 });
 
 //Instantiating Firestore with project details
