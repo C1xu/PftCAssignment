@@ -1,4 +1,4 @@
-const { getTenPrice, getTwentyPrice, getThirtyPrice, setTenPrice } = require("../../../../backend/db");
+import { getTenPrice, getTwentyPrice, getThirtyPrice, setTenPrice } from "../../../../backend/db";
 
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
