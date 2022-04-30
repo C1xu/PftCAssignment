@@ -83,15 +83,15 @@ app.use("/home", home)
 
 //Change json to getting price
 app.post('/setTenPrice', (req, res) => {
-  setTenPrice(req.body.Price);
+  setTenPrice(req.body);
 })
 
 app.post('/setTwentyPrice', (req, res) => {
-  setTwentyPrice(req.body.Price);
+  setTwentyPrice(req.body);
 })
 
 app.post('/setThirtyPrice', (req, res) => {
-  setThirtyPrice(req.body.Price);
+  setThirtyPrice(req.body);
 })
 
 // app.post('/getTenPrice', (req, res) => {
