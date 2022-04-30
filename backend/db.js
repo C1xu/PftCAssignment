@@ -66,7 +66,10 @@ export async function setTenPrice(payload){
   if(!rclient.isOpen){
     await rclient.connect();
   }
-  return await rclient.set("tenPrice", payload);
+  if (typeof payload === 'object') {
+    val = JSON.stringify(payload)
+  }
+  return await rclient.set("tenPrice", val);
 }
 
 export async function getTwentyPrice(){
