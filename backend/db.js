@@ -80,6 +80,7 @@ export async function getTenPrice() {
   if(!rclient.isOpen){
     await rclient.connect();
   }
+  console.log(rclient.get("tenPrice"));
   return rclient.get("tenPrice");
 }
 

@@ -95,18 +95,15 @@ app.post('/setThirtyPrice', (req, res) => {
 })
 
 app.get('/getTenPrice', (req, res) => {
-  getTenPrice();
-  return res.data;
+  return getTenPrice();
 })
 
 app.get('/getTwentyPrice', (req, res) => {
-  getTwentyPrice();
-  return res.data;
+  return getTwentyPrice();
 })
 
 app.get('/getThirtyPrice', (req, res) => {
-  getThirtyPrice();
-  return res.data;
+  return getThirtyPrice();
 })
 
 startServer();
