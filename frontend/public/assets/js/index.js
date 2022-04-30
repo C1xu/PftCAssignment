@@ -95,7 +95,6 @@ function thirtyCredits(){
 
 function setTen(){
   const price = document.getElementById("adminChangeTen").value;
-  console.log("admin" + price);
   axios.post("/setTenPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
@@ -106,10 +105,8 @@ function setTen(){
 }
 
 function setTwenty(){
-  var price = document.getElementById("adminChangeTwenty").innerText;
-  axios.post("/setTwentyPrice", {
-    Price: price
-  })
+  const price = document.getElementById("adminChangeTwenty").value;
+  axios.post("/setTwentyPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
   })
@@ -118,11 +115,42 @@ function setTwenty(){
   })
 }
 
-function setThirty(){
-  var price = document.getElementById("adminChangeThirty").innerText;
-  axios.post("/setThirtyPrice", {
-    Price: price
+function getTenPrice(){
+  axios.get("/getTenPrice")
+  .then(function (response) {
+    console.log(response);
+    return response;
   })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+function getTwentyPrice(){
+  axios.get("/getTwentyPrice")
+  .then(function (response) {
+    console.log(response);
+    return response;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+function getThirtyPrice(){
+  axios.get("/getThirtyPrice")
+  .then(function (response) {
+    console.log(response);
+    return response;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+function setThirty(){
+  const price = document.getElementById("adminChangeThirty").value;
+  axios.post("/setThirtyPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
   })

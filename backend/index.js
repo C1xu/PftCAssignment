@@ -9,7 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
 import clean from "./routes/home.js";
-import { setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
+import { getTenPrice, getThirtyPrice, getTwentyPrice, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
 
 const DEV = false;
 const PORT = DEV ? 80 : 443;
@@ -87,15 +87,26 @@ app.post('/setTenPrice', (req, res) => {
 })
 
 app.post('/setTwentyPrice', (req, res) => {
-  setTwentyPrice(req.body);
+  setTwentyPrice(req.query.Price);
 })
 
 app.post('/setThirtyPrice', (req, res) => {
-  setThirtyPrice(req.body);
+  setThirtyPrice(req.query.Price);
 })
 
-// app.post('/getTenPrice', (req, res) => {
+app.get('/getTenPrice', (req, res) => {
+  getTenPrice();
+  return res.data;
+})
 
-// })
+app.get('/getTwentyPrice', (req, res) => {
+  getTwentyPrice();
+  return res.data;
+})
+
+app.get('/getThirtyPrice', (req, res) => {
+  getThirtyPrice();
+  return res.data;
+})
 
 startServer();

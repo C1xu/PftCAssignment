@@ -55,18 +55,32 @@ export async function GetUserAdminInfo() {
   return adminInfo;
 }
 
-export async function getTenPrice() {
-  if(!rclient.isOpen){
-    await rclient.connect();
-  }
-  return rclient.get("tenPrice");
-}
-
 export async function setTenPrice(payload){
   if(!rclient.isOpen){
     await rclient.connect();
   }
   return await rclient.set("tenPrice", payload);
+}
+
+export async function setTwentyPrice(payload){
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
+  return await rclient.set("twentyPrice", payload);
+}
+
+export async function setThirtyPrice(payload){
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
+  return await rclient.set("thirtyPrice", payload);
+}
+
+export async function getTenPrice() {
+  if(!rclient.isOpen){
+    await rclient.connect();
+  }
+  return rclient.get("tenPrice");
 }
 
 export async function getTwentyPrice(){
@@ -76,13 +90,6 @@ export async function getTwentyPrice(){
   return rclient.get("twentyPrice");
 }
 
-export async function setTwentyPrice(payload){
-  if(!rclient.isOpen){
-    await rclient.connect();
-  }
-  return await rclient.set("twentyPrice", JSON.stringify(payload));
-}
-
 export async function getThirtyPrice(){
   if(!rclient.isOpen){
     await rclient.connect();
@@ -90,12 +97,7 @@ export async function getThirtyPrice(){
   return rclient.get("thirtyPrice");
 }
 
-export async function setThirtyPrice(payload){
-  if(!rclient.isOpen){
-    await rclient.connect();
-  }
-  return await rclient.set("thirtyPrice", JSON.stringify(payload));
-}
+
 
 //Collection (Table)
 //Document (Row)
