@@ -95,9 +95,7 @@ function thirtyCredits(){
 
 function setTen(){
   var price = document.getElementById("adminChangeTen").innerText;
-  axios.post("/setTenPrice", {
-    Price: price
-  })
+  axios.post("/setTenPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
   })
