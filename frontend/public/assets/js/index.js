@@ -28,7 +28,6 @@ const authenticateReq = async (token) => {
     signInContainer.style.display = "none";
 
     document.getElementById("home-container").innerHTML = '<a class="nav-link active" aria-current="page"></a>'
-    document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>';
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
     document.getElementById("picture").src = picture;
     let date = new Date();
@@ -43,9 +42,11 @@ const authenticateReq = async (token) => {
 
 function convertJPG(){
   document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>';
+  document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>';
 }
 function convertDoc(){
   document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept=".doc, .docx,"/>';
+  document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>';
 }
 
 function goToCredits(){
