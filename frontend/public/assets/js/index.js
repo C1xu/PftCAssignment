@@ -136,7 +136,7 @@ function getUser(email){
     console.log(error);
   })
 }
-function getAdmin(){
+async function getAdmin(){
   return await axios.post("/getAdmin")
   .then(async function (response) {
     console.log(response);
@@ -146,7 +146,7 @@ function getAdmin(){
     console.log(error);
   })
 }
-function getCredtis(){
+async function getCredtis(){
   return await axios.post("/getCredits")
   .then(async function (response) {
     console.log(response);
