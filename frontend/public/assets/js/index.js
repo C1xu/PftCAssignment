@@ -126,22 +126,16 @@ function setThirty(){
   })
 }
 
-async function getTenPrice(){
-  axios.get("/getTenPrice")
-  .then(function (response) {
-    console.log(response);
-    return response.data;
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
+function getTenPrice(){
+  const response = await axios.get("/getTenPrice");
+  return response.data;
 }
 
 function getTwentyPrice(){
   axios.get("/getTwentyPrice")
   .then(function (response) {
     console.log(response);
-    return response.data;
+    return response;
   })
   .catch(function (error) {
     console.log(error);
@@ -152,7 +146,7 @@ function getThirtyPrice(){
   axios.get("/getThirtyPrice")
   .then(function (response) {
     console.log(response);
-    return response.data;
+    return response;
   })
   .catch(function (error) {
     console.log(error);
