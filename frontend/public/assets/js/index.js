@@ -126,12 +126,12 @@ function setThirty(){
   })
 }
 
-function getTenPrice(){
+async function getTenPrice(){
   axios.post("/getTenPrice")
   .then(function (response) {
     console.log(response);
     console.log(response.data.price);
-    return response.data.price;
+    return await response.data.price;
   })
   .catch(function (error) {
     console.log(error);
