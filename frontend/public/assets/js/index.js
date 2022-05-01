@@ -135,7 +135,6 @@ async function checkIfUserExists(email){
     </div>
     `
     }
-    //return response.data.userExists;
   })
   .catch(function (error) {
     console.log(error);
