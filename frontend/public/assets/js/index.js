@@ -127,15 +127,21 @@ function setThirty(){
 }
 
 async function getTenPrice(){
-  const response = await axios.get("/getTenPrice");
-  return response.data;
+  axios.get("/getTenPrice")
+  .then(function (response) {
+    console.log(response);
+    return response.data;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
 }
 
 function getTwentyPrice(){
   axios.get("/getTwentyPrice")
   .then(function (response) {
     console.log(response);
-    return response;
+    return response.data;
   })
   .catch(function (error) {
     console.log(error);
@@ -146,7 +152,7 @@ function getThirtyPrice(){
   axios.get("/getThirtyPrice")
   .then(function (response) {
     console.log(response);
-    return response;
+    return response.data;
   })
   .catch(function (error) {
     console.log(error);
