@@ -52,7 +52,7 @@ export async function buyCredits(amount, email){
   console.log(amount);
   console.log(email);
   const docRef = db.collection("userData").doc(email).update({
-    credits: FieldValue.increment(amount)
+    credits: FieldValue.increment(parseInt(amount))
   });
 }
 
