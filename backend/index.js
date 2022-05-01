@@ -82,8 +82,10 @@ app.use("/clean", clean)
 
 app.use("/home", home)
 
-app.post('/buyCredits', (req, res) => {
-  buyCredits(req.query.Amount, req.query.Email);
+app.post('/buyCredits', async (req, res) => {
+  const amount = req.query.Amount;
+  const email = req.query.Email;
+  await buyCredits(amount, email);
 })
 
 app.post('/checkUserExists', async (req,res) => {
