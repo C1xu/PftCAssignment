@@ -1,4 +1,4 @@
-import Firestore from "@google-cloud/firestore";
+import Firestore, { FieldValue } from "@google-cloud/firestore";
 //import { createHmac } from "crypto";
 import Redis from "redis";
 //import { REPL_MODE_STRICT } from "repl";
@@ -25,7 +25,7 @@ rclient.on("connect", () => {
 })
 
 export async function CreateUser(email) {
-  const docRef = db.collection("userData").doc();
+  const docRef = db.collection("userData").doc(email);
   return await docRef.set({
     credits: 10,
     email: email,
@@ -49,15 +49,8 @@ export async function GetUser(email) {
 }
 
 export async function buyCredits(amount, email){
-  const docRef = db.collection("userData");
-  const snapshot = await docRef.where("email", "==", email).get();
-  let data = [];
-  snapshot.forEach((doc) => {
-    data.push(doc.data());
-  });
-  data[0].credits += amount;
-  return await snapshot.update({
-    credits: data[0].credits
+  const docRef = db.collection("userData").doc(email).update({
+    credits: FieldValue.increment(amount)
   });
 }
 
