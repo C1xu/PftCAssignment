@@ -216,14 +216,14 @@ async function checkIfUserExists(email){
 async function pay(){
   if(amount!= 0){
     await axios.post("/buyCredits?Amount=" + amount + "&Email="+localEmail)
-    .then(async function (response) {
+    .then(function (response) {
       console.log(response);
-      localCredits += amount;
-      document.getElementById("Credits").innerText = "Credits: " + localCredits; 
     })
     .catch(function (error) {
       console.log(error);
     })
+    localCredits += amount;
+    document.getElementById("Credits").innerText = "Credits: " + localCredits; 
   }
 }
 
