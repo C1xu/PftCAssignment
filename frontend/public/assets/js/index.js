@@ -80,17 +80,17 @@ function goToConvert(){
 //Set Price dependant on redis price set by admin
 function tenCredits(){
   var price = getTenPrice();
-  document.getElementById("costText").innerText = "Cost = $" + price;
+  document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
 }
 
 function twentyCredits(){
   var price = getTwentyPrice();
-  document.getElementById("costText").innerText = "Cost = $" + price;
+  document.getElementById("costText").innerText = "20 Credits Cost = $" + price;
 }
 
 function thirtyCredits(){
   var price = getThirtyPrice();
-  document.getElementById("costText").innerText = "Cost = $" + price;
+  document.getElementById("costText").innerText = "30 Credits Cost = $" + price;
 }
 
 function setTen(){
@@ -107,6 +107,17 @@ function setTen(){
 function setTwenty(){
   const price = document.getElementById("adminChangeTwenty").value;
   axios.post("/setTwentyPrice?Price=" + price)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+
+function setThirty(){
+  const price = document.getElementById("adminChangeThirty").value;
+  axios.post("/setThirtyPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
   })
@@ -142,17 +153,6 @@ function getThirtyPrice(){
   .then(function (response) {
     console.log(response);
     return response;
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
-
-function setThirty(){
-  const price = document.getElementById("adminChangeThirty").value;
-  axios.post("/setThirtyPrice?Price=" + price)
-  .then(function (response) {
-    console.log(response);
   })
   .catch(function (error) {
     console.log(error);
