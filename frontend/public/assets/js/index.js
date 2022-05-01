@@ -130,6 +130,7 @@ function getTenPrice(){
   axios.get("/getTenPrice")
   .then(function (response) {
     console.log(response);
+    console.log(response.data.price);
     return JSON.parse(response.data.price);
   })
   .catch(function (error) {
@@ -141,6 +142,7 @@ function getTwentyPrice(){
   axios.get("/getTwentyPrice")
   .then(function (response) {
     console.log(response);
+
     return JSON.parse(response.data.price);
   })
   .catch(function (error) {
