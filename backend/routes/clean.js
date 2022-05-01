@@ -10,8 +10,12 @@ const storage = new Storage({
 })
 
 clean.route("/").post( (req,res) => {
-    console.log("Hola");
-
+    const [files] = await storage.bucket(bucketname).getFiles();
+    files.forEach(file => {
+        if(new Date(file.metadata.timeCreated) < Date.now() - (86400000)){
+            file.delete();
+        }
+    });
 });
 
 export default clean;
