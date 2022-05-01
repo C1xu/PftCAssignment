@@ -5,6 +5,8 @@ let signInContainer = document.getElementById("signInContainer");
 
 let localAdmin = false;
 let localCredits = 0;
+let amount = 0;
+let localEmail = "";
 
 const authenticateReq = async (token) => {
   const url = `/auth?token=${token}`;
@@ -20,7 +22,7 @@ const authenticateReq = async (token) => {
     const email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
-
+    localEmail = email;
     checkIfUserExists(email);
     profile.style.display = "inline";
     signInContainer.style.display = "none";
@@ -97,14 +99,17 @@ function goToConvert(){
 async function tenCredits(){
   var price = await getTenPrice();
   document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
+  amount = 10;
 }
 async function twentyCredits(){
   var price = await getTwentyPrice();
   document.getElementById("costText").innerText = "20 Credits Cost = $" + price;
+  amount = 20;
 }
 async function thirtyCredits(){
   var price = await getThirtyPrice();
   document.getElementById("costText").innerText = "30 Credits Cost = $" + price;
+  amount = 30;
 }
 
 async function checkIfUserExists(email){
@@ -124,6 +129,9 @@ async function checkIfUserExists(email){
     </div>
     <div>
       <span id="costText"> Cost </span>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary launch" onclick="pay()"> <i class="fa fa-rocket"></i> Pay </button>
     </div>
     <div id="adminDiv">
       <div class="input-group mb-3">
@@ -153,6 +161,9 @@ async function checkIfUserExists(email){
     </div>
     <div>
       <span id="costText"> Cost </span>
+    </div>
+    <div>
+      <button type="button" class="btn btn-primary launch" onclick="pay()"> <i class="fa fa-rocket"></i> Pay </button>
     </div>
     `
     }
@@ -201,6 +212,17 @@ async function checkIfUserExists(email){
 //     console.log(error);
 //   })
 // }
+
+function pay(){
+  if(amount!= 0){
+    await axios.post("/buyCredits?Amount=" + amount + "?Email="+email)
+    .then(function (response) {
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+}
 
 function setTen(){
   var price = document.getElementById("adminChangeTen").value;

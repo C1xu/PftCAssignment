@@ -48,6 +48,19 @@ export async function GetUser(email) {
   return data;
 }
 
+export async function buyCredits(amount, email){
+  const docRef = db.collection("userData");
+  const snapshot = await docRef.where("email", "==", email).get();
+  let data = [];
+  snapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+  data[0].credits += amount;
+  return await snapshot.update({
+    credits: data[0].credits
+  });
+}
+
 // export async function CheckUser(email){
 //   const docRef = db.collection("userData");
 //   const snapshot = await docRef.where("email", "==", email).get();
