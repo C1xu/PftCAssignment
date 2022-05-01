@@ -76,8 +76,7 @@ app.get("/", (req, res) => {
 
 app.use("/auth", auth)
 
-app.use("/uploadJPG", uploadJPG)
-app.use("/uploadDoc", uploadDoc)
+app.use("/upload", upload)
 
 app.use("/clean", clean)
 
