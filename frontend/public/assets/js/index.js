@@ -47,7 +47,7 @@ const authenticateReq = async (token) => {
 
 function convertJPG(){
   document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>';
-  document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick=" reduceCredit();"> Convert </button>';
+  document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile(); reduceCredit();"> Convert </button>';
 }
 function convertDoc(){
   document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept=".doc, .docx,"/>';
