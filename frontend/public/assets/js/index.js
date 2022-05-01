@@ -213,7 +213,7 @@ async function checkIfUserExists(email){
 //   })
 // }
 
-function pay(){
+async function pay(){
   if(amount!= 0){
     await axios.post("/buyCredits?Amount=" + amount + "?Email="+email)
     .then(function (response) {
