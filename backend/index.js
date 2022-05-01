@@ -94,6 +94,7 @@ app.post('/setThirtyPrice', (req, res) => {
   setThirtyPrice(req.query.Price);
 })
 
+//Not working
 app.get('/getTenPrice', (req, res) => {
   console.log(getTenPrice());
   console.log(res);
