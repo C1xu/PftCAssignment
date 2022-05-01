@@ -82,15 +82,15 @@ app.use("/clean", clean)
 
 app.use("/home", home)
 
-app.post('/checkUserExists', (req,res) => {
- var check = CheckUser(req.query.Email);
+app.post('/checkUserExists', async (req,res) => {
+ var check = await CheckUser(req.query.Email);
  res.send({userExists: check})
 })
-app.post('/createUser', (req, res) => {
-  CreateUser(req.query.Email);
+app.post('/createUser', async (req, res) => {
+  await CreateUser(req.query.Email);
 })
-app.post('/getUser', (req, res) => {
-  GetUser(req.query.Email);
+app.post('/getUser', async (req, res) => {
+  await GetUser(req.query.Email);
 })
 app.post('getAdmin', async (req, res) =>{
   var adminCheck = await GetUserAdminInfo();
