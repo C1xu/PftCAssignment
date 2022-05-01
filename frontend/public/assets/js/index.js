@@ -21,7 +21,7 @@ const authenticateReq = async (token) => {
     const picture = response.data.picture;
     const expiry = response.data.expiry;
 
-    checkIfUserExists();
+    checkIfUserExists(email);
     profile.style.display = "inline";
     signInContainer.style.display = "none";
 
@@ -30,7 +30,7 @@ const authenticateReq = async (token) => {
     document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
     
-    if(getAdmin()){
+    if(localAdmin){
       document.getElementById("creditsDiv").innerHTML = 
     `
     <div>
