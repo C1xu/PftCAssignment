@@ -218,7 +218,7 @@ async function pay(){
     await axios.post("/buyCredits?Amount=" + amount + "&Email="+localEmail)
     .then(async function (response) {
       console.log(response);
-      document.getElementById("Credits").innerText = "Credits: "; 
+      checkIfUserExists(localEmail);
     })
     .catch(function (error) {
       console.log(error);
