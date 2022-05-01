@@ -9,7 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
 import clean from "./routes/home.js";
-import { getTenPrice, getThirtyPrice, getTwentyPrice, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
+import { CheckUser, CreateUser, getTenPrice, getThirtyPrice, getTwentyPrice, GetUser, GetUserAdminInfo, GetUserCredits, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
 
 const DEV = false;
 const PORT = DEV ? 80 : 443;
@@ -82,30 +82,45 @@ app.use("/clean", clean)
 
 app.use("/home", home)
 
-//Change json to getting price
+app.post('/checkUserExists', (req,res) => {
+ var check = CheckUser(req.query.Email);
+ res.send({userExists: check})
+})
+app.post('/createUser', (req, res) => {
+  CreateUser(req.query.Email);
+})
+app.post('/getUser', (req, res) => {
+  GetUser(req.query.Email);
+})
+app.post('getAdmin', (req, res) =>{
+  var adminCheck = await GetUserAdminInfo();
+  res.send({admin: adminCheck})
+})
+app.post('getCredits', (req, res) => {
+  var creditAmount = await GetUserCredits();
+  res.send({credits: creditAmount})
+})
+
+// Allows admin to change prices of credits
 app.post('/setTenPrice', (req, res) => {
   setTenPrice(req.query.Price);
 })
-
 app.post('/setTwentyPrice', (req, res) => {
   setTwentyPrice(req.query.Price);
 })
-
 app.post('/setThirtyPrice', (req, res) => {
   setThirtyPrice(req.query.Price);
 })
 
-//Not working
+// Allows users to check prices of credits
 app.post('/getTenPrice', async (req, res) => {
   var tenPrice = await getTenPrice();
   res.send({price: tenPrice})
 })
-
 app.post('/getTwentyPrice', async (req, res) => {
   var twentyPrice = await getTwentyPrice();
   res.send({price: twentyPrice})
 })
-
 app.post('/getThirtyPrice', async (req, res) => {
   var thirtyPrice = await getThirtyPrice();
   res.send({price: thirtyPrice})

@@ -1,11 +1,10 @@
-//import { getTenPrice, getTwentyPrice, getThirtyPrice, setTenPrice } from "../../../../backend/db.js";
+import { GetUser } from "../../../../backend/db";
 
 let signInButton = document.getElementById("signIn");
 let signOutButton = document.getElementById("signOut");
 let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 
-//import { CreateUser, GetUser } from "../../../../backend/db";
 
 const authenticateReq = async (token) => {
   const url = `/auth?token=${token}`;
@@ -21,6 +20,10 @@ const authenticateReq = async (token) => {
     const email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
+    if(!checkIfUserExists())
+      createUser(email);
+    getUser(email);
+
     profile.style.display = "inline";
     signInContainer.style.display = "none";
 
@@ -28,7 +31,9 @@ const authenticateReq = async (token) => {
     document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>'
     document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
-    document.getElementById("creditsDiv").innerHTML = 
+    
+    if(getAdmin()){
+      document.getElementById("creditsDiv").innerHTML = 
     `
     <div>
       <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
@@ -56,6 +61,20 @@ const authenticateReq = async (token) => {
       </div>
     </div>
     `
+    }else{
+      document.getElementById("creditsDiv").innerHTML = 
+    `
+    <div>
+      <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
+      <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
+      <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
+    </div>
+    <div>
+      <span id="costText"> Cost </span>
+    </div>
+    `
+    }
+    
     document.getElementById("picture").src = picture;
     let date = new Date();
     date.setTime(date.getTime() + expiry)
@@ -71,7 +90,6 @@ function goToCredits(){
   document.getElementById("convertSection").style="display:none";
   document.getElementById("creditsSection").style="display:inline";
 }
-
 function goToConvert(){
   document.getElementById("convertSection").style="display:inline";
   document.getElementById("creditsSection").style="display:none";
@@ -80,18 +98,65 @@ function goToConvert(){
 //Set Price dependant on redis price set by admin
 async function tenCredits(){
   var price = await getTenPrice();
-  console.log(price);
   document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
 }
-
 function twentyCredits(){
-  var price = getTwentyPrice();
+  var price = await getTwentyPrice();
   document.getElementById("costText").innerText = "20 Credits Cost = $" + price;
 }
-
 function thirtyCredits(){
-  var price = getThirtyPrice();
+  var price = await getThirtyPrice();
   document.getElementById("costText").innerText = "30 Credits Cost = $" + price;
+}
+
+async function checkIfUserExists(email){
+  return await axios.post("/checkUserExists?Email=" + email)
+  .then(async function (response) {
+    console.log(response);
+    return response.data.userExists;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+function createUser(email){
+  axios.post("/createUser?Email=" + email)
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+function getUser(email){
+  axios.post("/getUser?Email=" + email)
+  .then(function (response) {
+    console.log(response);
+    //return response.data.;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+function getAdmin(){
+  return await axios.post("/getAdmin")
+  .then(async function (response) {
+    console.log(response);
+    return response.data.admin;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+}
+function getCredtis(){
+  return await axios.post("/getCredits")
+  .then(async function (response) {
+    console.log(response);
+    return response.data.credits;
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
 }
 
 function setTen(){
@@ -104,7 +169,6 @@ function setTen(){
     console.log(error);
   })
 }
-
 function setTwenty(){
   var price = document.getElementById("adminChangeTwenty").value;
   axios.post("/setTwentyPrice?Price=" + price)
@@ -115,7 +179,6 @@ function setTwenty(){
     console.log(error);
   })
 }
-
 function setThirty(){
   var price = document.getElementById("adminChangeThirty").value;
   axios.post("/setThirtyPrice?Price=" + price)
@@ -138,10 +201,9 @@ async function getTenPrice(){
     console.log(error);
   })
 }
-
 function getTwentyPrice(){
-  axios.post("/getTwentyPrice")
-  .then(function (response) {
+  return await axios.post("/getTwentyPrice")
+  .then(async function (response) {
     console.log(response);
     console.log(response.data.price);
     return response.data.price;
@@ -150,10 +212,9 @@ function getTwentyPrice(){
     console.log(error);
   })
 }
-
 function getThirtyPrice(){
-  axios.post("/getThirtyPrice")
-  .then(function (response) {
+  return await axios.post("/getThirtyPrice")
+  .then(async function (response) {
     console.log(response);
     console.log(response.data.price);
     return response.data.price;

@@ -47,6 +47,20 @@ export async function GetUser(email) {
   }
 }
 
+export async function CheckUser(email){
+  const docRef = db.collection("userData");
+  const snapshot = await docRef.where("email", "==", email).get();
+  let data = [];
+  snapshot.forEach((doc) => {
+    data.push(doc.data());
+  });
+
+  if (data.length > 0)
+    return true;
+  else 
+    return false;
+}
+
 export async function GetUserCredits() {
   return userCredits;
 }
