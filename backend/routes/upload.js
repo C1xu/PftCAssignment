@@ -64,7 +64,7 @@ upload.route("/").post(fileUpload.single("image"), async function (req, res) {
     var url = "";
     var headers = {};
 
-    ext = path.extname(`${req.file.originalname}`);
+    var ext = path.extname(`${req.file.originalname}`);
     if (ext == ".png" || ext == ".jpg" || ext == ".gif" || ext == ".jpeg") {
       url = "https://getoutpdf.com/api/convert/image-to-pdf"
       headers = {
