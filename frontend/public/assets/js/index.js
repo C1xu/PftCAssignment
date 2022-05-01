@@ -117,8 +117,8 @@ async function checkIfUserExists(email){
     console.log(error);
   })
 }
-function createUser(email){
-  axios.post("/createUser?Email=" + email)
+async function createUser(email){
+  await axios.post("/createUser?Email=" + email)
   .then(function (response) {
     console.log(response);
   })
@@ -126,8 +126,8 @@ function createUser(email){
     console.log(error);
   })
 }
-function getUser(email){
-  axios.post("/getUser?Email=" + email)
+async function getUser(email){
+  await axios.post("/getUser?Email=" + email)
   .then(function (response) {
     console.log(response);
     //return response.data.;
