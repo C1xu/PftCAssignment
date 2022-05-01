@@ -8,7 +8,7 @@ import { SecretManagerServiceClient } from "@google-cloud/secret-manager";
 import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
-import clean from "./routes/home.js";
+import clean from "./routes/clean.js";
 import { buyCredits, CreateUser, getTenPrice, getThirtyPrice, getTwentyPrice, GetUser, reduceCredit, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
 
 const DEV = false;

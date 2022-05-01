@@ -1,5 +1,5 @@
 import Express from "express";
-import { Storage  } from "@google-cloud/storage";
+import { Storage } from "@google-cloud/storage";
 const clean = Express.Router();
 
 const bucketName = "pftcxu.appspot.com";
@@ -9,8 +9,9 @@ const storage = new Storage({
     keyFilename: './key.json'
 })
 
-clean.route("/").post((req,res) => {
+clean.route("/").post( (req,res) => {
     console.log("Hola");
+
 });
 
 export default clean;
