@@ -18,6 +18,7 @@ const authenticateReq = async (token) => {
     const email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
+    //const admin = getAdmin();
     if(!checkIfUserExists())
       createUser(email);
     getUser(email);
@@ -72,7 +73,7 @@ const authenticateReq = async (token) => {
     </div>
     `
     }
-    document.getElementById("Credits").innerText = "Credits: " + getCredtis(); 
+    document.getElementById("Credits").innerText = "Credits: " + getCredits(); 
     document.getElementById("picture").src = picture;
     let date = new Date();
     date.setTime(date.getTime() + expiry)
@@ -146,7 +147,7 @@ async function getAdmin(){
     console.log(error);
   })
 }
-async function getCredtis(){
+async function getCredits(){
   return await axios.post("/getCredits")
   .then(async function (response) {
     console.log(response);
