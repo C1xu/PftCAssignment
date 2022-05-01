@@ -127,7 +127,7 @@ function setThirty(){
 }
 
 function getTenPrice(){
-  const response = await axios.get("/getTenPrice");
+  const response = axios.get("/getTenPrice");
   return response.data;
 }
 
