@@ -98,17 +98,17 @@ app.post('/setThirtyPrice', (req, res) => {
 //Not working
 app.get('/getTenPrice', async (req, res) => {
   var tenPrice = await getTenPrice();
-  res.send({tenPrice: tenPrice})
+  res.send({price: tenPrice})
 })
 
 app.get('/getTwentyPrice', async (req, res) => {
   var twentyPrice = await getTwentyPrice();
-  res.send({twentyPrice: twentyPrice})
+  res.send({price: twentyPrice})
 })
 
 app.get('/getThirtyPrice', async (req, res) => {
   var thirtyPrice = await getThirtyPrice();
-  res.send({thirtyPrice: thirtyPrice})
+  res.send({price: thirtyPrice})
 })
 
 startServer();
