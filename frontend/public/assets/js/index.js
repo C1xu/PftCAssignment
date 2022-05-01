@@ -30,6 +30,90 @@ const authenticateReq = async (token) => {
     document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
     
+    // if(localAdmin){
+    //   document.getElementById("creditsDiv").innerHTML = 
+    // `
+    // <div>
+    //   <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
+    //   <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
+    //   <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
+    // </div>
+    // <div>
+    //   <span id="costText"> Cost </span>
+    // </div>
+    // <div id="adminDiv">
+    //   <div class="input-group mb-3">
+    //     <span class="input-group-text">$</span>
+    //       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTen">
+    //       <button type="button" class="btn btn-primary launch" onclick="setTen()"> <i class="fa fa-rocket"></i> Set 10 </button>
+    //   </div>
+    //   <div class="input-group mb-3">
+    //     <span class="input-group-text">$</span>
+    //       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTwenty">
+    //       <button type="button" class="btn btn-primary launch" onclick="setTwenty()"> <i class="fa fa-rocket"></i> Set 20 </button>
+    //   </div>
+    //   <div class="input-group mb-3">
+    //     <span class="input-group-text">$</span>
+    //       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeThirty">
+    //       <button type="button" class="btn btn-primary launch" onclick="setThirty()"> <i class="fa fa-rocket"></i> Set 30 </button>
+    //   </div>
+    // </div>
+    // `
+    // }else{
+    //   document.getElementById("creditsDiv").innerHTML = 
+    // `
+    // <div>
+    //   <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
+    //   <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
+    //   <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
+    // </div>
+    // <div>
+    //   <span id="costText"> Cost </span>
+    // </div>
+    // `
+    // }
+    // document.getElementById("Credits").innerText = "Credits: " + localCredits; 
+    document.getElementById("picture").src = picture;
+    let date = new Date();
+    date.setTime(date.getTime() + expiry)
+    document.cookie = `token=${token};expires=${date.toUTCString()}`;
+    console.log(`${name} signed in successfully.`);
+  } else {
+    profile.style.display = "none";
+    signInContainer.style.display = "inline";
+  }
+};
+
+function goToCredits(){
+  document.getElementById("convertSection").style="display:none";
+  document.getElementById("creditsSection").style="display:inline";
+}
+function goToConvert(){
+  document.getElementById("convertSection").style="display:inline";
+  document.getElementById("creditsSection").style="display:none";
+}
+
+//Set Price dependant on redis price set by admin
+async function tenCredits(){
+  var price = await getTenPrice();
+  document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
+}
+async function twentyCredits(){
+  var price = await getTwentyPrice();
+  document.getElementById("costText").innerText = "20 Credits Cost = $" + price;
+}
+async function thirtyCredits(){
+  var price = await getThirtyPrice();
+  document.getElementById("costText").innerText = "30 Credits Cost = $" + price;
+}
+
+async function checkIfUserExists(email){
+  await axios.post("/checkUserExists?Email=" + email)
+  .then(async function (response) {
+    console.log(response);
+    localAdmin = response.data.Admin;
+    localCredits = response.data.Credits;
+    document.getElementById("Credits").innerText = "Credits: " + localCredits; 
     if(localAdmin){
       document.getElementById("creditsDiv").innerHTML = 
     `
@@ -72,49 +156,6 @@ const authenticateReq = async (token) => {
     </div>
     `
     }
-    document.getElementById("Credits").innerText = "Credits: " + localCredits; 
-    document.getElementById("picture").src = picture;
-    let date = new Date();
-    date.setTime(date.getTime() + expiry)
-    document.cookie = `token=${token};expires=${date.toUTCString()}`;
-    console.log(`${name} signed in successfully.`);
-  } else {
-    profile.style.display = "none";
-    signInContainer.style.display = "inline";
-  }
-};
-
-function goToCredits(){
-  document.getElementById("convertSection").style="display:none";
-  document.getElementById("creditsSection").style="display:inline";
-}
-function goToConvert(){
-  document.getElementById("convertSection").style="display:inline";
-  document.getElementById("creditsSection").style="display:none";
-}
-
-//Set Price dependant on redis price set by admin
-async function tenCredits(){
-  var price = await getTenPrice();
-  document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
-}
-async function twentyCredits(){
-  var price = await getTwentyPrice();
-  document.getElementById("costText").innerText = "20 Credits Cost = $" + price;
-}
-async function thirtyCredits(){
-  var price = await getThirtyPrice();
-  document.getElementById("costText").innerText = "30 Credits Cost = $" + price;
-}
-
-async function checkIfUserExists(email){
-  await axios.post("/checkUserExists?Email=" + email)
-  .then(async function (response) {
-    console.log(response);
-    localAdmin = response.data.Admin;
-    console.log(localAdmin);
-    localCredits = response.data.Credits;
-    console.log(localCredits);
     //return response.data.userExists;
   })
   .catch(function (error) {
