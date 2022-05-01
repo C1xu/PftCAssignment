@@ -29,6 +29,11 @@ const authenticateReq = async (token) => {
 
     document.getElementById("home-container").innerHTML = '<a class="nav-link active" aria-current="page"></a>'
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
+    document.getElementById("inputConvertFileButtons").innerHTML = 
+    `
+    <button id="JPG to PDF" type="button" class="btn btn-success" onclick="convertJPG()">Convert JPG</button>
+    <button id="Doc to PDF" type="button" class="btn btn-success" onclick="convertDoc()">Convert Doc</button>
+    `
     document.getElementById("picture").src = picture;
     let date = new Date();
     date.setTime(date.getTime() + expiry)
