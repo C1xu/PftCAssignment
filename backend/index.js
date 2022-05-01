@@ -85,7 +85,11 @@ app.use("/home", home)
 app.post('/buyCredits', async (req, res) => {
   const amount = req.query.Amount;
   const email = req.query.Email;
-  await buyCredits(amount, email);
+  await buyCredits(amount, email).then(async (response) => {
+    if(response == true){
+      res.send({Paid: true})
+    }
+  });
 })
 
 app.post('/checkUserExists', async (req,res) => {

@@ -52,6 +52,7 @@ export async function buyCredits(amount, email){
   const docRef = db.collection("userData").doc(email).update({
     credits: FieldValue.increment(parseInt(amount))
   });
+  return true;
 }
 
 // export async function CheckUser(email){

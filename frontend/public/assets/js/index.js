@@ -218,8 +218,7 @@ async function pay(){
     await axios.post("/buyCredits?Amount=" + amount + "&Email="+localEmail)
     .then(async function (response) {
       console.log(response);
-      localCredits = localCredits + amount;
-      document.getElementById("Credits").innerText = "Credits: " + localCredits; 
+      document.getElementById("Credits").innerText = "Credits: "; 
     })
     .catch(function (error) {
       console.log(error);
