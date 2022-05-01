@@ -1,13 +1,6 @@
 import Firestore, { FieldValue } from "@google-cloud/firestore";
-//import { createHmac } from "crypto";
 import Redis from "redis";
 //import { REPL_MODE_STRICT } from "repl";
-
-// export let rclient = new Redis.createClient({
-//   host: 'www.c1xu.me',
-//   port: '443',
-//   TLS: true,
-// });
 
 export let rclient = new Redis.createClient();
 
@@ -51,6 +44,12 @@ export async function GetUser(email) {
 export async function buyCredits(amount, email){
   const docRef = db.collection("userData").doc(email).update({
     credits: FieldValue.increment(parseInt(amount))
+  });
+  return true;
+}
+export async function reduceCredit(email){
+  const docRef = db.collection("userData").doc(email).update({
+    credits: FieldValue.increment(-1)
   });
   return true;
 }
@@ -118,28 +117,3 @@ export async function getThirtyPrice(){
   }
   return rclient.get("thirtyPrice");
 }
-
-
-
-//Collection (Table)
-//Document (Row)
-//docRef selects the collection
-// export async function AddDocument(collection, data) {
-//   const docRef = db.collection(collection).doc();
-//   return await docRef.set(data);
-// }
-
-// export async function GetDocument(collection, valueType, value) {
-//   const docRef = db.collection(collection);
-//   const snapshot = await docRef.where(valueType, "==", value).get();
-//   let data = [];
-//   snapshot.forEach((doc) => {
-//     data.push(doc.data());
-//   });
-//   return data;
-// }
-
-// export function HashPassword(password) {
-//   const secret = "ABCxyz";
-//   return createHmac("sha256", password).update(secret).digest("hex");
-// }

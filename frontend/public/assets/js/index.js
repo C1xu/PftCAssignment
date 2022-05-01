@@ -28,53 +28,8 @@ const authenticateReq = async (token) => {
     signInContainer.style.display = "none";
 
     document.getElementById("home-container").innerHTML = '<a class="nav-link active" aria-current="page"></a>'
-    document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>'
-    document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>'
+    document.getElementById("inputConvertFileButton").innerHTML = '<button id="convert" type="button" class="btn btn-primary" onclick="uploadFile()"> Convert </button>';
     document.getElementById("navbarDropdownMenuLink").innerHTML = '<img id="picture" src="" class="rounded-circle" style="margin-right: 5px" height="25" alt="" loading="lazy"/>' + name;
-    
-    // if(localAdmin){
-    //   document.getElementById("creditsDiv").innerHTML = 
-    // `
-    // <div>
-    //   <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
-    //   <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
-    //   <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
-    // </div>
-    // <div>
-    //   <span id="costText"> Cost </span>
-    // </div>
-    // <div id="adminDiv">
-    //   <div class="input-group mb-3">
-    //     <span class="input-group-text">$</span>
-    //       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTen">
-    //       <button type="button" class="btn btn-primary launch" onclick="setTen()"> <i class="fa fa-rocket"></i> Set 10 </button>
-    //   </div>
-    //   <div class="input-group mb-3">
-    //     <span class="input-group-text">$</span>
-    //       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeTwenty">
-    //       <button type="button" class="btn btn-primary launch" onclick="setTwenty()"> <i class="fa fa-rocket"></i> Set 20 </button>
-    //   </div>
-    //   <div class="input-group mb-3">
-    //     <span class="input-group-text">$</span>
-    //       <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" id="adminChangeThirty">
-    //       <button type="button" class="btn btn-primary launch" onclick="setThirty()"> <i class="fa fa-rocket"></i> Set 30 </button>
-    //   </div>
-    // </div>
-    // `
-    // }else{
-    //   document.getElementById("creditsDiv").innerHTML = 
-    // `
-    // <div>
-    //   <button type="button" class="btn btn-primary launch" onclick="tenCredits()"> <i class="fa fa-rocket"></i> 10 Credits </button>
-    //   <button type="button" class="btn btn-primary launch" onclick="twentyCredits()"> <i class="fa fa-rocket"></i> 20 Credits </button>
-    //   <button type="button" class="btn btn-primary launch" onclick="thirtyCredits()"> <i class="fa fa-rocket"></i> 30 Credits </button>
-    // </div>
-    // <div>
-    //   <span id="costText"> Cost </span>
-    // </div>
-    // `
-    // }
-    // document.getElementById("Credits").innerText = "Credits: " + localCredits; 
     document.getElementById("picture").src = picture;
     let date = new Date();
     date.setTime(date.getTime() + expiry)
@@ -85,6 +40,13 @@ const authenticateReq = async (token) => {
     signInContainer.style.display = "inline";
   }
 };
+
+function convertJPG(){
+  document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept="image/*"/>';
+}
+function convertDoc(){
+  document.getElementById("inputConvertFileDiv").innerHTML = '<input id="fileInput" class="form-control" type="file" id="formFile" accept=".doc, .docx,"/>';
+}
 
 function goToCredits(){
   document.getElementById("convertSection").style="display:none";
@@ -219,6 +181,18 @@ async function pay(){
     .then(async function (response) {
       console.log(response);
       getCredits(localEmail);
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
+  }
+}
+
+async function reduceCredit(){
+  if(amount!= 0){
+    await axios.post("/useCredit?Email="+localEmail)
+    .then(function (response) {
+      console.log(response);
     })
     .catch(function (error) {
       console.log(error);
