@@ -98,11 +98,11 @@ async function tenCredits(){
   var price = await getTenPrice();
   document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
 }
-function twentyCredits(){
+async function twentyCredits(){
   var price = await getTwentyPrice();
   document.getElementById("costText").innerText = "20 Credits Cost = $" + price;
 }
-function thirtyCredits(){
+async function thirtyCredits(){
   var price = await getThirtyPrice();
   document.getElementById("costText").innerText = "30 Credits Cost = $" + price;
 }
