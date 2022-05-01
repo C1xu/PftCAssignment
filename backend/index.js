@@ -86,7 +86,7 @@ app.post('/checkUserExists', async (req,res) => {
   const email = req.query.Email;
   GetUser(email).then(async(response) => {
     if(response.length > 0)
-      res.send({Rredits: response[0].credits, Admin: response[0].admin})
+      res.send({Credits: response[0].credits, Admin: response[0].admin})
     else{
       const newUser = await CreateUser(email);
       res.send({Credits: newUser.credits, Admin: newUser.admin})

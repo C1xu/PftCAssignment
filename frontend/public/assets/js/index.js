@@ -112,7 +112,7 @@ async function checkIfUserExists(email){
   .then(async function (response) {
     console.log(response);
     localAdmin = response.data.Admin;
-    localCredits = response.data.localCredits;
+    localCredits = response.data.Credits;
     //return response.data.userExists;
   })
   .catch(function (error) {
