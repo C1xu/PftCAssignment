@@ -96,21 +96,19 @@ app.post('/setThirtyPrice', (req, res) => {
 })
 
 //Not working
-app.get('/getTenPrice', (req, res) => {
-  console.log(getTenPrice());
-  console.log(res);
-  console.log(res.data);
-  return res.data;
+app.post('/getTenPrice', (req, res) => {
+  var tenPrice = await getTenPrice();
+  res.send({tenPrice: tenPrice})
 })
 
-app.get('/getTwentyPrice', (req, res) => {
-  getTwentyPrice();
-  return res.data;
+app.post('/getTwentyPrice', (req, res) => {
+  var twentyPrice = await getTwentyPrice();
+  res.send({twentyPrice: twentyPrice})
 })
 
-app.get('/getThirtyPrice', (req, res) => {
-  getThirtyPrice();
-  return res.data;
+app.post('/getThirtyPrice', (req, res) => {
+  var thirtyPrice = await getThirtyPrice();
+  res.send({thirtyPrice: thirtyPrice})
 })
 
 startServer();
