@@ -80,6 +80,7 @@ function goToConvert(){
 //Set Price dependant on redis price set by admin
 async function tenCredits(){
   var price = await getTenPrice();
+  console.log(price);
   document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
 }
 
