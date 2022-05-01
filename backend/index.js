@@ -9,7 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
 import clean from "./routes/home.js";
-import { CreateUser, getTenPrice, getThirtyPrice, getTwentyPrice, GetUser, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
+import { buyCredits, CreateUser, getTenPrice, getThirtyPrice, getTwentyPrice, GetUser, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
 
 const DEV = false;
 const PORT = DEV ? 80 : 443;
