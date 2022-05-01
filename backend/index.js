@@ -96,7 +96,7 @@ app.post('/setThirtyPrice', (req, res) => {
 })
 
 //Not working
-app.get('/getTenPrice', async (req, res) => {
+app.post('/getTenPrice', async (req, res) => {
   var tenPrice = await getTenPrice();
   res.send({price: tenPrice})
 })

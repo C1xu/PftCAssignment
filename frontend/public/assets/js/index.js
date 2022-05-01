@@ -127,7 +127,7 @@ function setThirty(){
 }
 
 function getTenPrice(){
-  axios.get("/getTenPrice")
+  axios.post("/getTenPrice")
   .then(function (response) {
     console.log(response);
     console.log(response.data.price);
