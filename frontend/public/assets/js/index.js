@@ -226,8 +226,8 @@ async function pay(){
   }
 }
 
-async function getCredits(){
-  await axios.post("/getUserCredits?Email="+ Email)
+async function getCredits(email){
+  await axios.post("/getUserCredits?Email="+ email)
     .then(async function (response) {
       console.log(response);
       localCredits = response.data.Credits;
