@@ -100,7 +100,6 @@ app.post('/useCredit', async (req, res) => {
   });
 })
 
-
 app.post('/checkUserExists', async (req,res) => {
   const email = req.query.Email;
   GetUser(email).then(async(response) => {

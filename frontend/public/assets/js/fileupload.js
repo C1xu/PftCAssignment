@@ -11,6 +11,6 @@ const uploadFile = async () => {
       formData.append("image", fileUpload);
       const response = await axios.post(url, formData, headers);
       console.log(response);
+      document.getElementById("conversionLink").innerText = "Download link: " + response.data.link;
     }
 };
-

@@ -91,6 +91,7 @@ upload.route("/").post(fileUpload.single("image"), async function (req, res) {
     res.send({
       status: "200",
       message: "File uploaded successfully! Processing..",
+      link: "https://storage.cloud.google.com/pftcxu.appspot.com/completed/" + req.file.originalname.substring(0, req.file.originalname.lastIndexOf(".")),
     });
   }
 });

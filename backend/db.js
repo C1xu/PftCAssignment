@@ -23,6 +23,7 @@ export async function CreateUser(email) {
     credits: 10,
     email: email,
     admin: false,
+    conversions: {},
   });
 }
 
@@ -33,12 +34,14 @@ export async function GetUser(email) {
   snapshot.forEach((doc) => {
     data.push(doc.data());
   });
-
-  // if (data.length > 0) {
-  //   userCredits = data[0].credits;
-  //   adminInfo = data[0].admin;
-  // }
   return data;
+}
+
+export async function addConversion(info, email){
+  const docRef = db.collection("userData").doc(email).update({
+    credits: FieldValue.increment(parseInt(amount))
+  });
+  return true;
 }
 
 export async function buyCredits(amount, email){
@@ -49,32 +52,10 @@ export async function buyCredits(amount, email){
 }
 export async function reduceCredit(email){
   const docRef = db.collection("userData").doc(email).update({
-    credits: FieldValue.increment(-1)
+    credits: FieldValue.increment(parseInt("-1"))
   });
   return true;
 }
-
-// export async function CheckUser(email){
-//   const docRef = db.collection("userData");
-//   const snapshot = await docRef.where("email", "==", email).get();
-//   let data = [];
-//   snapshot.forEach((doc) => {
-//     data.push(doc.data());
-//   });
-
-//   if (data.length > 0)
-//     return true;
-//   else 
-//     return false;
-// }
-
-// export async function GetUserCredits() {
-//   return userCredits;
-// }
-
-// export async function GetUserAdminInfo() {
-//   return adminInfo;
-// }
 
 export async function setTenPrice(payload){
   if(!rclient.isOpen){

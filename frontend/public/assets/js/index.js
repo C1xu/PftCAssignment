@@ -141,45 +141,6 @@ async function checkIfUserExists(email){
     console.log(error);
   })
 }
-// async function createUser(email){
-//   await axios.post("/createUser?Email=" + email)
-//   .then(function (response) {
-//     console.log(response);
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
-// }
-// async function getUser(email){
-//   await axios.post("/getUser?Email=" + email)
-//   .then(function (response) {
-//     console.log(response);
-//     //return response.data.;
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
-// }
-// async function getAdmin(){
-//   return await axios.post("/getAdmin")
-//   .then(async function (response) {
-//     console.log(response);
-//     return response.data.admin;
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
-// }
-// async function getCredits(){
-//   return await axios.post("/getCredits")
-//   .then(async function (response) {
-//     console.log(response);
-//     return response.data.credits;
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   })
-// }
 
 async function pay(){
   if(amount!= 0){
