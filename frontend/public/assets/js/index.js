@@ -80,7 +80,7 @@ function goToConvert(){
 //Set Price dependant on redis price set by admin
 function tenCredits(){
   var price = getTenPrice();
-  document.getElementById("costText").innerText = "10 Credits Cost = $" + getTenPrice();
+  document.getElementById("costText").innerText = "10 Credits Cost = $" + price;
 }
 
 function twentyCredits(){
@@ -94,7 +94,7 @@ function thirtyCredits(){
 }
 
 function setTen(){
-  const price = document.getElementById("adminChangeTen").value;
+  var price = document.getElementById("adminChangeTen").value;
   axios.post("/setTenPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
@@ -105,7 +105,7 @@ function setTen(){
 }
 
 function setTwenty(){
-  const price = document.getElementById("adminChangeTwenty").value;
+  var price = document.getElementById("adminChangeTwenty").value;
   axios.post("/setTwentyPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
@@ -116,7 +116,7 @@ function setTwenty(){
 }
 
 function setThirty(){
-  const price = document.getElementById("adminChangeThirty").value;
+  var price = document.getElementById("adminChangeThirty").value;
   axios.post("/setThirtyPrice?Price=" + price)
   .then(function (response) {
     console.log(response);
