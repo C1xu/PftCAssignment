@@ -9,7 +9,7 @@ const storage = new Storage({
     keyFilename: './key.json'
 })
 
-clean.route("/").post( (req,res) => {
+clean.route("/").post(async (req,res) => {
     const [files] = await storage.bucket(bucketname).getFiles();
     files.forEach(file => {
         if(new Date(file.metadata.timeCreated) < Date.now() - (86400000)){
