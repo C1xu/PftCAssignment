@@ -3,6 +3,8 @@ let signOutButton = document.getElementById("signOut");
 let profile = document.getElementById("profile");
 let signInContainer = document.getElementById("signInContainer");
 
+let localAdmin = false;
+let localCredits = 0;
 
 const authenticateReq = async (token) => {
   const url = `/auth?token=${token}`;
@@ -18,11 +20,8 @@ const authenticateReq = async (token) => {
     const email = response.data.email;
     const picture = response.data.picture;
     const expiry = response.data.expiry;
-    //const admin = getAdmin();
-    if(!checkIfUserExists())
-      createUser(email);
-    getUser(email);
 
+    checkIfUserExists();
     profile.style.display = "inline";
     signInContainer.style.display = "none";
 
@@ -73,7 +72,7 @@ const authenticateReq = async (token) => {
     </div>
     `
     }
-    document.getElementById("Credits").innerText = "Credits: " + getCredits(); 
+    document.getElementById("Credits").innerText = "Credits: " + localCredits; 
     document.getElementById("picture").src = picture;
     let date = new Date();
     date.setTime(date.getTime() + expiry)
@@ -109,54 +108,56 @@ async function thirtyCredits(){
 }
 
 async function checkIfUserExists(email){
-  return await axios.post("/checkUserExists?Email=" + email)
+  await axios.post("/checkUserExists?Email=" + email)
   .then(async function (response) {
     console.log(response);
-    return response.data.userExists;
+    localAdmin = response.data.Admin;
+    localCredits = response.data.localCredits;
+    //return response.data.userExists;
   })
   .catch(function (error) {
     console.log(error);
   })
 }
-async function createUser(email){
-  await axios.post("/createUser?Email=" + email)
-  .then(function (response) {
-    console.log(response);
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
-async function getUser(email){
-  await axios.post("/getUser?Email=" + email)
-  .then(function (response) {
-    console.log(response);
-    //return response.data.;
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
-async function getAdmin(){
-  return await axios.post("/getAdmin")
-  .then(async function (response) {
-    console.log(response);
-    return response.data.admin;
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
-async function getCredits(){
-  return await axios.post("/getCredits")
-  .then(async function (response) {
-    console.log(response);
-    return response.data.credits;
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-}
+// async function createUser(email){
+//   await axios.post("/createUser?Email=" + email)
+//   .then(function (response) {
+//     console.log(response);
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   })
+// }
+// async function getUser(email){
+//   await axios.post("/getUser?Email=" + email)
+//   .then(function (response) {
+//     console.log(response);
+//     //return response.data.;
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   })
+// }
+// async function getAdmin(){
+//   return await axios.post("/getAdmin")
+//   .then(async function (response) {
+//     console.log(response);
+//     return response.data.admin;
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   })
+// }
+// async function getCredits(){
+//   return await axios.post("/getCredits")
+//   .then(async function (response) {
+//     console.log(response);
+//     return response.data.credits;
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   })
+// }
 
 function setTen(){
   var price = document.getElementById("adminChangeTen").value;

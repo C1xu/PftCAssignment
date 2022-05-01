@@ -1,4 +1,4 @@
-import Express from "express";
+import Express, { response } from "express";
 import cors from "cors";
 import { fileURLToPath } from "url";
 import path, { dirname } from "path";
@@ -83,23 +83,32 @@ app.use("/clean", clean)
 app.use("/home", home)
 
 app.post('/checkUserExists', async (req,res) => {
- var check = await CheckUser(req.query.Email);
- res.send({userExists: check})
+  const email = req.query.Email;
+  GetUser(email).then(async(response) => {
+    if(response.length > 0)
+      res.send({Rredits: response[0].credits, Admin: response[0].admin})
+    else{
+      const newUser = await CreateUser(email);
+      res.send({Credits: newUser.credits, Admin: newUser.admin})
+    }
+  })
+  // var check = await CheckUser(req.query.Email);
+  // res.send({userExists: check})
 })
-app.post('/createUser', async (req, res) => {
-  await CreateUser(req.query.Email);
-})
-app.post('/getUser', async (req, res) => {
-  await GetUser(req.query.Email);
-})
-app.post('getAdmin', async (req, res) =>{
-  var adminCheck = await GetUserAdminInfo();
-  res.send({admin: adminCheck})
-})
-app.post('getCredits', async (req, res) => {
-  var creditAmount = await GetUserCredits();
-  res.send({credits: creditAmount})
-})
+// app.post('/createUser', async (req, res) => {
+//   await CreateUser(req.query.Email);
+// })
+// app.post('/getUser', async (req, res) => {
+//   await GetUser(req.query.Email);
+// })
+// app.post('getAdmin', async (req, res) =>{
+//   var adminCheck = await GetUserAdminInfo();
+//   res.send({admin: adminCheck})
+// })
+// app.post('getCredits', async (req, res) => {
+//   var creditAmount = await GetUserCredits();
+//   res.send({credits: creditAmount})
+// })
 
 // Allows admin to change prices of credits
 app.post('/setTenPrice', (req, res) => {
