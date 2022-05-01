@@ -10,7 +10,7 @@ const storage = new Storage({
 })
 
 clean.route("/").post((req,res) => {
-    
+    console.log("Hola");
 });
 
 export default clean;
