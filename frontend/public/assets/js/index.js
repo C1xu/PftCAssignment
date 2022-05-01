@@ -199,7 +199,7 @@ async function getTenPrice(){
     console.log(error);
   })
 }
-function getTwentyPrice(){
+async function getTwentyPrice(){
   return await axios.post("/getTwentyPrice")
   .then(async function (response) {
     console.log(response);
@@ -210,7 +210,7 @@ function getTwentyPrice(){
     console.log(error);
   })
 }
-function getThirtyPrice(){
+async function getThirtyPrice(){
   return await axios.post("/getThirtyPrice")
   .then(async function (response) {
     console.log(response);
