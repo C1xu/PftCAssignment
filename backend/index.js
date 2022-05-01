@@ -9,7 +9,7 @@ import auth from "./routes/auth.js";
 import upload from "./routes/upload.js";
 import home from "./routes/home.js";
 import clean from "./routes/home.js";
-import { buyCredits, CreateUser, getTenPrice, getThirtyPrice, getTwentyPrice, GetUser, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
+import { buyCredits, CreateUser, getTenPrice, getThirtyPrice, getTwentyPrice, GetUser, reduceCredit, setTenPrice, setThirtyPrice, setTwentyPrice } from "./db.js";
 
 const DEV = false;
 const PORT = DEV ? 80 : 443;
@@ -91,6 +91,15 @@ app.post('/buyCredits', async (req, res) => {
     }
   });
 })
+app.post('/useCredit', async (req, res) => {
+  const email = req.query.Email;
+  await reduceCredit(email).then(async (response) => {
+    if(response == true){
+      res.send({Paid: true})
+    }
+  });
+})
+
 
 app.post('/checkUserExists', async (req,res) => {
   const email = req.query.Email;
@@ -111,20 +120,6 @@ app.post('/getUserCredits', async (req,res) => {
       res.send({Credits: response[0].credits})
   })
 })
-// app.post('/createUser', async (req, res) => {
-//   await CreateUser(req.query.Email);
-// })
-// app.post('/getUser', async (req, res) => {
-//   await GetUser(req.query.Email);
-// })
-// app.post('getAdmin', async (req, res) =>{
-//   var adminCheck = await GetUserAdminInfo();
-//   res.send({admin: adminCheck})
-// })
-// app.post('getCredits', async (req, res) => {
-//   var creditAmount = await GetUserCredits();
-//   res.send({credits: creditAmount})
-// })
 
 // Allows admin to change prices of credits
 app.post('/setTenPrice', (req, res) => {
