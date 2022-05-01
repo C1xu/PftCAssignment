@@ -3,7 +3,7 @@ const uploadFile = async () => {
     const fileUpload = document.getElementById("fileInput").files[0];
     if (fileUpload) {
       var formData = new FormData();
-      const url = `/uploadJPG`;
+      const url = `/upload`;
       const headers = {
         "Content-Type": "multipart/form-data",
         "Access-Control-Allow-Origin": "*",
