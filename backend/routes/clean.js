@@ -10,7 +10,7 @@ const storage = new Storage({
 })
 
 clean.route("/").post(async (req,res) => {
-    const [files] = await storage.bucket(bucketname).getFiles();
+    const [files] = await storage.bucket(bucketName).getFiles();
     files.forEach(file => {
         if(new Date(file.metadata.timeCreated) < Date.now() - (86400000)){
             file.delete();
