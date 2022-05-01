@@ -130,8 +130,7 @@ function getTenPrice(){
   axios.post("/getTenPrice")
   .then(function (response) {
     console.log(response);
-    console.log(response.data.price);
-    return JSON.parse(response.data.price);
+    return response.data.price;
   })
   .catch(function (error) {
     console.log(error);
@@ -139,11 +138,10 @@ function getTenPrice(){
 }
 
 function getTwentyPrice(){
-  axios.get("/getTwentyPrice")
+  axios.post("/getTwentyPrice")
   .then(function (response) {
     console.log(response);
-
-    return JSON.parse(response.data.price);
+    return response.data.price;
   })
   .catch(function (error) {
     console.log(error);
@@ -151,10 +149,10 @@ function getTwentyPrice(){
 }
 
 function getThirtyPrice(){
-  axios.get("/getThirtyPrice")
+  axios.post("/getThirtyPrice")
   .then(function (response) {
     console.log(response);
-    return JSON.parse(response.data.price);
+    return response.data.price;
   })
   .catch(function (error) {
     console.log(error);

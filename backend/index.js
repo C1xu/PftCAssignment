@@ -101,12 +101,12 @@ app.post('/getTenPrice', async (req, res) => {
   res.send({price: tenPrice})
 })
 
-app.get('/getTwentyPrice', async (req, res) => {
+app.post('/getTwentyPrice', async (req, res) => {
   var twentyPrice = await getTwentyPrice();
   res.send({price: twentyPrice})
 })
 
-app.get('/getThirtyPrice', async (req, res) => {
+app.post('/getThirtyPrice', async (req, res) => {
   var thirtyPrice = await getThirtyPrice();
   res.send({price: thirtyPrice})
 })
