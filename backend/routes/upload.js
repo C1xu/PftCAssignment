@@ -79,16 +79,10 @@ upload.route("/").post(imageUpload.single("image"), async function (req, res){
 
 
         //Convert back to file
-        var convertedFile = Buffer.from(response_64, 'base64');//.toString('ascii');
-        //var convertedFile = atob(response_64);
-        //console.log(convertedFile);
-
-        // var convertedFile = fs.writeFile(req.file.originalname, response_64, {encoding: 'base64'}, function(err) {
-        //   console.log('File created');
-        // });
+        var convertedFile = Buffer.from(response_64, 'base64');
 
         //Upload to google cloud, completed bucket
-        await storage.bucket("pftcxu.appspot.com").file("completed/" + req.file.originalname.substring(0, req.file.originalname.lastIndexOf(".")) + ".pdf").save(convertedFile); //.file("completed/test").save(convertedFile);
+        await storage.bucket("pftcxu.appspot.com").file("completed/" + req.file.originalname.substring(0, req.file.originalname.lastIndexOf(".")) + ".pdf").save(convertedFile);
         
         res.send({
             status: "200",

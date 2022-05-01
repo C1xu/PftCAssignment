@@ -126,15 +126,9 @@ function setThirty(){
   })
 }
 
-function getTenPrice(){
-  axios.get("/getTenPrice")
-  .then(function (response) {
-    console.log(response);
-    return response;
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
+async function getTenPrice(){
+  const response = await axios.get("/getTenPrice");
+  return response.data;
 }
 
 function getTwentyPrice(){
