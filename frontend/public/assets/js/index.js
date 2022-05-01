@@ -74,7 +74,7 @@ const authenticateReq = async (token) => {
     </div>
     `
     }
-    
+    document.getElementById("Credits").innerText = "Credits: " + getCredtis(); 
     document.getElementById("picture").src = picture;
     let date = new Date();
     date.setTime(date.getTime() + expiry)

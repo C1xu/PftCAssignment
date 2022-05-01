@@ -92,11 +92,11 @@ app.post('/createUser', (req, res) => {
 app.post('/getUser', (req, res) => {
   GetUser(req.query.Email);
 })
-app.post('getAdmin', (req, res) =>{
+app.post('getAdmin', async (req, res) =>{
   var adminCheck = await GetUserAdminInfo();
   res.send({admin: adminCheck})
 })
-app.post('getCredits', (req, res) => {
+app.post('getCredits', async (req, res) => {
   var creditAmount = await GetUserCredits();
   res.send({credits: creditAmount})
 })
