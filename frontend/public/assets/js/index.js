@@ -223,6 +223,7 @@ async function pay(){
       console.log(error);
     })
     localCredits += amount;
+    document.getElementById("Credits").innerText = "";
     document.getElementById("Credits").innerText = "Credits: " + localCredits; 
   }
 }
