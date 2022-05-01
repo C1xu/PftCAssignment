@@ -102,8 +102,14 @@ app.post('/checkUserExists', async (req,res) => {
       res.send({Credits: newUser.credits, Admin: newUser.admin})
     }
   })
-  // var check = await CheckUser(req.query.Email);
-  // res.send({userExists: check})
+})
+
+app.post('/getUserCredits', async (req,res) => {
+  const email = req.query.Email;
+  GetUser(email).then(async(response) => {
+    if(response.length > 0)
+      res.send({Credits: response[0].credits})
+  })
 })
 // app.post('/createUser', async (req, res) => {
 //   await CreateUser(req.query.Email);

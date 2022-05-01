@@ -218,12 +218,24 @@ async function pay(){
     await axios.post("/buyCredits?Amount=" + amount + "&Email="+localEmail)
     .then(async function (response) {
       console.log(response);
-      checkIfUserExists(localEmail);
+      getCredits(localEmail);
     })
     .catch(function (error) {
       console.log(error);
     })
   }
+}
+
+async function getCredits(){
+  await axios.post("/getUserCredits?Email="+ Email)
+    .then(async function (response) {
+      console.log(response);
+      localCredits = response.data.Credits;
+      document.getElementById("Credits").innerText = "Credits: " + localCredits; 
+    })
+    .catch(function (error) {
+      console.log(error);
+    })
 }
 
 function setTen(){
